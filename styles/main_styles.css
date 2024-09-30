@@ -1557,3 +1557,45 @@ section {
 	font-size: 12px;
 	color: #232323;
 }
+
+.whatsapp-float {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 100;
+}
+
+.whatsapp-float img {
+	width: 80px;
+	height: 80px;
+}
+
+.social-floating-buttons {
+	position: fixed;
+	bottom: 20px;
+	left: 15px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	z-index: 50;
+}
+
+.social-btn img {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+	transition: transform 0.3s;
+}
+
+.social-btn img:hover {
+	transform: scale(1.1);
+}
+
+.social-btn.facebook img {
+	background-color: #3b5998;
+}
+
+.social-btn.instagram img {
+	background-color: #E1306C;
+}
