@@ -1077,8 +1077,8 @@ section {
 	-ms-transform: translate(-50%, -50%);
 	-o-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
-	width: 20px;
-	height: 25px;
+	width: 22px;
+    height: 35px;
 }
 
 .product_buy:hover {

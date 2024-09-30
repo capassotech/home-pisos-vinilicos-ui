@@ -72,22 +72,22 @@ function updatePagination() {
     nextButton.disabled = currentPage === totalPages;
 }
 
-// document.getElementById('prev').addEventListener('click', () => {
-//     if (currentPage > 1) {
-//         currentPage--;
-//         updateProductDisplay(products, currentPage);
-//         updatePagination();
-//     }
-// });
+document.getElementById('prev').addEventListener('click', () => {
+    if (currentPage > 1) {
+        currentPage--;
+        updateProductDisplay(products, currentPage);
+        updatePagination();
+    }
+});
 
-// document.getElementById('next').addEventListener('click', () => {
-//     const totalPages = Math.ceil(products.length / itemsPerPage);
-//     if (currentPage < totalPages) {
-//         currentPage++;
-//         updateProductDisplay(products, currentPage);
-//         updatePagination();
-//     }
-// });
+document.getElementById('next').addEventListener('click', () => {
+    const totalPages = Math.ceil(products.length / itemsPerPage);
+    if (currentPage < totalPages) {
+        currentPage++;
+        updateProductDisplay(products, currentPage);
+        updatePagination();
+    }
+});
 
 // Llama a la función
 getProductos();
