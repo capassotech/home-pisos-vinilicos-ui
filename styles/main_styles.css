@@ -633,6 +633,7 @@ section {
 	-ms-transition: all 200ms ease;
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
+	display: flex !important;
 }
 
 .home_slider_next:hover {
@@ -1566,8 +1567,8 @@ section {
 }
 
 .whatsapp-float img {
-	width: 80px;
-	height: 80px;
+	width: 60px;
+	height: 60px;
 }
 
 .social-floating-buttons {
