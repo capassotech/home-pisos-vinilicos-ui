@@ -222,7 +222,9 @@
 
 @media only screen and (max-width: 768px)
 {
-	
+	.producto_grid{
+		display: block;
+	}
 }
 
 /************
@@ -233,6 +235,8 @@
 {
 	.product
 	{
+		flex: 1 1 calc(50% - 20px);
+
 		width: 100%;
 	}
 	.sidebar_left
@@ -392,7 +396,10 @@
 
 @media only screen and (max-width: 539px)
 {
-	
+	.products{
+		margin-bottom: 40px;
+
+	}
 }
 
 /************
@@ -401,7 +408,17 @@
 
 @media only screen and (max-width: 480px)
 {
+	.product{
+		flex: 1 1 100%;
+		margin-bottom: 30px;
+	}
 	
+	.producto_grid{
+		height: 100%;
+	}
+	.footer{
+		padding-top: 0px; 
+	}
 }
 
 /************

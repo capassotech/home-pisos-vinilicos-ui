@@ -1021,7 +1021,7 @@ section
 .accordion_panel
 {
 	padding-right: 8px;
-	max-height: 0px;
+	/* max-height: 0px; */
 	overflow: hidden;
 	-webkit-transition: all 500ms ease;
 	-moz-transition: all 500ms ease;

@@ -20,7 +20,7 @@ let products = [];
 
 // Función para obtener productos
 function getProductos() {
-    const productsContainer = document.querySelector('.product_grid');
+    const productsContainer = document.querySelector('.producto_grid');
 
     database.ref('Product').once('value').then((snapshot) => {
         products = snapshot.val() ? Object.values(snapshot.val()) : [];
@@ -33,7 +33,7 @@ function getProductos() {
 
 // Función para mostrar los productos de la página actual
 function updateProductDisplay(products, page) {
-    const productsContainer = document.querySelector('.product_grid');
+    const productsContainer = document.querySelector('.producto_grid');
     productsContainer.innerHTML = ''; // Limpia el contenedor
 
     const startIndex = (page - 1) * itemsPerPage;
