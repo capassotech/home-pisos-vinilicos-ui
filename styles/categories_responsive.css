@@ -146,6 +146,11 @@
 	{
 		width: 960px;
 	}
+
+	.products{
+		margin-bottom: 50%;
+
+	}
 }
 
 /************
@@ -213,8 +218,12 @@
 
 @media only screen and (max-width: 880px)
 {
-	
+	.products{
+		margin-bottom: 55%;
+
+	}
 }
+
 
 /************
 9. 768px
@@ -268,6 +277,11 @@
 	.sidebar_promo_2
 	{
 		margin-top: 30px;
+	}
+
+	.products{
+		margin-bottom: 15%;
+
 	}
 }
 

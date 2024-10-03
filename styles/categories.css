@@ -709,13 +709,14 @@ section
 .product{
 	flex: 1 1 calc(33.33% - 20px);
 	margin: 10px;
+	max-width: 300px;
 }
 .products
 {
-	min-height: 110vh !important;
+	min-height: 80vh !important;
 	padding-top: 94px;
 	background: #FFFFFF;
-	margin-bottom: 30px;
+	margin-bottom: 35%;
 }
 .current_page
 {
@@ -865,6 +866,8 @@ section
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
 
 }
 .product {
