@@ -27,7 +27,7 @@ function getProductos() {
         updateProductDisplay(products, currentPage);
         updatePagination();
     }).catch((error) => {
-        console.error('Error obteniendo los productos:', error);
+        console.error('Error obteniendo los productos');
     });
 }
 

@@ -633,6 +633,7 @@ section {
 	-ms-transition: all 200ms ease;
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
+	display: flex !important;
 }
 
 .home_slider_next:hover {
@@ -1074,8 +1075,8 @@ section {
 	-ms-transform: translate(-50%, -50%);
 	-o-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
-	width: 20px;
-	height: 25px;
+	width: 22px;
+    height: 35px;
 }
 
 .product_buy:hover {
@@ -1554,4 +1555,46 @@ section {
 	font-family: 'Lucida', serif;
 	font-size: 12px;
 	color: #232323;
+}
+
+.whatsapp-float {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	z-index: 100;
+}
+
+.whatsapp-float img {
+	width: 60px;
+	height: 60px;
+}
+
+.social-floating-buttons {
+	position: fixed;
+	bottom: 20px;
+	left: 15px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	z-index: 50;
+}
+
+.social-btn img {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+	transition: transform 0.3s;
+}
+
+.social-btn img:hover {
+	transform: scale(1.1);
+}
+
+.social-btn.facebook img {
+	background-color: #3b5998;
+}
+
+.social-btn.instagram img {
+	background-color: #E1306C;
 }
