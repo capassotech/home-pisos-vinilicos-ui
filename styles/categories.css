@@ -706,12 +706,17 @@ section
 /*********************************
 6. Products
 *********************************/
-
+.product{
+	flex: 1 1 calc(33.33% - 20px);
+	margin: 10px;
+	max-width: 300px;
+}
 .products
 {
+	min-height: 80vh !important;
 	padding-top: 94px;
-	padding-bottom: 98px;
 	background: #FFFFFF;
+	margin-bottom: 35%;
 }
 .current_page
 {
@@ -853,19 +858,22 @@ section
 .products_container
 {
 	margin-top: 10px;
+
 }
-.product_grid
-{
-	width: calc(100% + 30px);
-	margin-left: -15px;
+.producto_grid {
+    width: 100%; 
+    margin-left: 0; 
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+
 }
-.product
-{
-	width: calc(100% / 3);
-	/*margin-right: 30px;*/
-	margin-bottom: 40px;
-	padding-left: 15px;
-	padding-right: 15px;
+.product {
+    flex: 1 1 calc(33.333% - 30px); 
+    margin-bottom: 40px;
+    padding: 0 15px; 
 }
 .product:nth-child(3n)
 {
@@ -1009,7 +1017,17 @@ section
 }
 .page_nums
 {
-	margin-top: 41px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 30px;
+}
+
+.page_nums button{
+	border: none;
+	background: none;
+	cursor: pointer;
+	padding: 1%;
 }
 .page_nums li
 {
@@ -1545,7 +1563,7 @@ section
 
 .footer
 {
-	padding-top: 80px;
+    margin-top: auto;
 }
 .footer_logo a
 {
@@ -1617,4 +1635,11 @@ section
 	font-family: 'Lucida', serif;
 	font-size: 12px;
 	color: #232323;
+}
+
+.container{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
 }

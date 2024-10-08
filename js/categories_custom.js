@@ -127,9 +127,9 @@ $(document).ready(function()
 		var sortingButtons = $('.product_sorting_btn');
 		var sortNums = $('.num_sorting_btn');
 
-		if($('.product_grid').length)
+		if($('.producto_grid').length)
 		{
-			var grid = $('.product_grid').isotope({
+			var grid = $('.producto_grid').isotope({
 				itemSelector: '.product',
 				layoutMode: 'fitRows',
 	            getSortData:
@@ -212,7 +212,7 @@ $(document).ready(function()
 	        		var numSortingText = $(this).text();
 					var numFilter = ':nth-child(-n+' + numSortingText + ')';
 	        		$('.num_sorting_text').text($(this).text());
-    				$('.product_grid').isotope({filter: numFilter });
+    				$('.producto_grid').isotope({filter: numFilter });
 	        	});
 	        });	
 		}
@@ -243,7 +243,7 @@ $(document).ready(function()
 			$( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
 			$('.filter_price').on('mouseup', function()
 			{
-				$('.product_grid').isotope({
+				$('.producto_grid').isotope({
 		            filter: function()
 		            {
 		            	var priceRange = $('#amount').val();
