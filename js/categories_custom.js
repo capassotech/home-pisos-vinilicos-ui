@@ -30,6 +30,7 @@ $(document).ready(function()
 	var burger = $('.burger_container');
 
 	setHeader();
+	loadFeaturedCategories();
 
 	$(window).on('resize', function()
 	{
@@ -64,6 +65,54 @@ $(document).ready(function()
 		}
 	}
 
+
+	function loadFeaturedCategories() {
+
+		const firebaseConfig = {
+			apiKey: "AIzaSyDCjcyPOQ_29zyZGtxk13iJdbDsP1AG8bM",
+			authDomain: "home-pisos-vinilicos.firebaseapp.com",
+			databaseURL: "https://home-pisos-vinilicos-default-rtdb.firebaseio.com",
+			projectId: "home-pisos-vinilicos",
+			storageBucket: "home-pisos-vinilicos.appspot.com",
+			messagingSenderId: "392689672279",
+			appId: "1:392689672279:web:81245db39bf2e1dab7c312",
+			measurementId: "G-4HC6MV32X4"
+		};
+	
+		firebase.initializeApp(firebaseConfig);
+		const database = firebase.database();
+	
+		database.ref("Category").once("value")
+			.then((snapshot) => {
+				const categories = snapshot.val();
+				
+				if (categories) {
+					const categoryList = Object.values(categories);
+					
+					const featuredCategories = categoryList.filter(category => category.IsFeatured);
+	
+					if (featuredCategories.length > 0) {
+						if (featuredCategories[0]) {
+							document.getElementById("pvc-category").textContent = featuredCategories[0].Name || "Pisos de PVC";
+						}
+						if (featuredCategories[1]) {
+							document.getElementById("revestimientos-category").textContent = featuredCategories[1].Name || "Revestimientos";
+						}
+					} else {
+						console.error("No se encontraron categorías destacadas.");
+					}
+				} else {
+					console.error("No se encontraron categorías.");
+				}
+			})
+			.catch((error) => {
+				console.error("Error al obtener las categorías:", error);
+			});
+	}
+	
+	document.addEventListener("DOMContentLoaded", loadFeaturedCategories);
+	
+	
 	/* 
 
 	3. Init Menu
