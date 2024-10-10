@@ -31,6 +31,7 @@ $(document).ready(function()
 
 	setHeader();
 	loadFeaturedCategories();
+	loadProductsByCategory();
 
 	$(window).on('resize', function()
 	{
@@ -88,28 +89,31 @@ $(document).ready(function()
 				if (categories) {
 					const categoryList = Object.values(categories);
 	
+					// Filtrar las categorías destacadas
 					const featuredCategories = categoryList.filter(category => category.IsFeatured);
 					
+					// Mostrar las categorías destacadas
 					if (featuredCategories.length > 0) {
 						if (featuredCategories[0]) {
 							document.getElementById("pvc-category").firstElementChild.textContent = featuredCategories[0].Name || "Pisos de PVC";
-							document.getElementById("pvc-category").firstElementChild.href = `/category/${featuredCategories[0].IdCategory}`; 
+							document.getElementById("pvc-category").firstElementChild.href = `/productsByCategory.html?category=${featuredCategories[0].IdCategory}`; // Redirige con el ID de la categoría
 						}
 						if (featuredCategories[1]) {
 							document.getElementById("revestimientos-category").firstElementChild.textContent = featuredCategories[1].Name || "Revestimientos";
-							document.getElementById("revestimientos-category").firstElementChild.href = `/category/${featuredCategories[1].IdCategory}`; 
+							document.getElementById("revestimientos-category").firstElementChild.href = `/productsByCategory.html?category=${featuredCategories[1].IdCategory}`; // Redirige con el ID de la categoría
 						}
 					} else {
 						console.error("No se encontraron categorías destacadas.");
 					}
 	
+					// Filtrar las categorías no destacadas y mostrarlas en el menú desplegable
 					const nonFeaturedCategories = categoryList.filter(category => !category.IsFeatured);
 					const moreProductsMenu = document.getElementById("more-products");
 	
 					nonFeaturedCategories.forEach(category => {
 						const li = document.createElement("li");
 						const a = document.createElement("a");
-						a.href = `/category/${category.IdCategory}`;  
+						a.href = `/productsByCategory.html?category=${category.IdCategory}`;  // Redirige con el ID de la categoría
 						a.textContent = category.Name;
 						a.classList.add("dropdown-item");
 						li.appendChild(a);
@@ -127,6 +131,64 @@ $(document).ready(function()
 	
 	document.addEventListener("DOMContentLoaded", loadFeaturedCategories);
 	
+	function loadProductsByCategory() {
+		const firebaseConfig = {
+			apiKey: "AIzaSyDCjcyPOQ_29zyZGtxk13iJdbDsP1AG8bM",
+			authDomain: "home-pisos-vinilicos.firebaseapp.com",
+			databaseURL: "https://home-pisos-vinilicos-default-rtdb.firebaseio.com",
+			projectId: "home-pisos-vinilicos",
+			storageBucket: "home-pisos-vinilicos.appspot.com",
+			messagingSenderId: "392689672279",
+			appId: "1:392689672279:web:81245db39bf2e1dab7c312",
+			measurementId: "G-4HC6MV32X4"
+		};
+	
+		// Inicializar Firebase solo si aún no está inicializado
+		if (!firebase.apps.length) {
+			firebase.initializeApp(firebaseConfig);
+		}
+		const database = firebase.database();
+	
+		// Obtener el parámetro de categoría de la URL
+		const urlParams = new URLSearchParams(window.location.search);
+		const categoryId = urlParams.get('category');
+	
+		if (categoryId) {
+			// Obtener los productos filtrados por categoría desde Firebase
+			database.ref("Product").orderByChild("IdCategory").equalTo(categoryId).once("value")
+				.then((snapshot) => {
+					const products = snapshot.val();
+					
+					// Obtener la categoría seleccionada
+					database.ref("Category/" + categoryId).once("value")
+						.then((categorySnapshot) => {
+							const category = categorySnapshot.val();
+							document.getElementById("category-title").textContent = "Productos de " + (category ? category.Name : "Categoría Desconocida");
+						});
+	
+					const productList = document.getElementById("product-list");
+					productList.innerHTML = ''; // Limpiar la lista antes de agregar productos
+	
+					if (products) {
+						const productArray = Object.values(products);
+						productArray.forEach(product => {
+							const li = document.createElement("li");
+							li.textContent = product.Name; // Mostrar el nombre del producto
+							productList.appendChild(li);
+						});
+					} else {
+						productList.textContent = "No se encontraron productos para esta categoría.";
+					}
+				})
+				.catch((error) => {
+					console.error("Error al cargar los productos:", error);
+				});
+		} else {
+			document.getElementById("category-title").textContent = "Categoría no especificada.";
+		}
+	}
+	
+	document.addEventListener("DOMContentLoaded", loadProductsByCategory);
 	
 	/* 
 
