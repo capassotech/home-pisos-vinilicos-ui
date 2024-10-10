@@ -65,9 +65,7 @@ $(document).ready(function()
 		}
 	}
 
-
 	function loadFeaturedCategories() {
-
 		const firebaseConfig = {
 			apiKey: "AIzaSyDCjcyPOQ_29zyZGtxk13iJdbDsP1AG8bM",
 			authDomain: "home-pisos-vinilicos.firebaseapp.com",
@@ -82,25 +80,42 @@ $(document).ready(function()
 		firebase.initializeApp(firebaseConfig);
 		const database = firebase.database();
 	
+		// Obtener las categorías desde Firebase
 		database.ref("Category").once("value")
 			.then((snapshot) => {
 				const categories = snapshot.val();
 				
 				if (categories) {
 					const categoryList = Object.values(categories);
-					
-					const featuredCategories = categoryList.filter(category => category.IsFeatured);
 	
+					const featuredCategories = categoryList.filter(category => category.IsFeatured);
+					
 					if (featuredCategories.length > 0) {
 						if (featuredCategories[0]) {
-							document.getElementById("pvc-category").textContent = featuredCategories[0].Name || "Pisos de PVC";
+							document.getElementById("pvc-category").firstElementChild.textContent = featuredCategories[0].Name || "Pisos de PVC";
+							document.getElementById("pvc-category").firstElementChild.href = `/category/${featuredCategories[0].IdCategory}`; 
 						}
 						if (featuredCategories[1]) {
-							document.getElementById("revestimientos-category").textContent = featuredCategories[1].Name || "Revestimientos";
+							document.getElementById("revestimientos-category").firstElementChild.textContent = featuredCategories[1].Name || "Revestimientos";
+							document.getElementById("revestimientos-category").firstElementChild.href = `/category/${featuredCategories[1].IdCategory}`; 
 						}
 					} else {
 						console.error("No se encontraron categorías destacadas.");
 					}
+	
+					const nonFeaturedCategories = categoryList.filter(category => !category.IsFeatured);
+					const moreProductsMenu = document.getElementById("more-products");
+	
+					nonFeaturedCategories.forEach(category => {
+						const li = document.createElement("li");
+						const a = document.createElement("a");
+						a.href = `/category/${category.IdCategory}`;  
+						a.textContent = category.Name;
+						a.classList.add("dropdown-item");
+						li.appendChild(a);
+						moreProductsMenu.appendChild(li);
+					});
+					
 				} else {
 					console.error("No se encontraron categorías.");
 				}
