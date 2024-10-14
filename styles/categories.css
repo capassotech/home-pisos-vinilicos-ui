@@ -870,6 +870,16 @@ section
 	justify-content: center;
 
 }
+.product-list {
+    width: 100%; 
+    margin-left: 0; 
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+
+}
 .product {
     flex: 1 1 calc(33.333% - 30px); 
     margin-bottom: 40px;
