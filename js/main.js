@@ -15,7 +15,7 @@ firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
 let currentPage = 1;
-const itemsPerPage = 6; // Cambia esto según tus necesidades
+const itemsPerPage = 6; 
 let products = [];
 
 // Función para obtener productos
@@ -31,7 +31,7 @@ function getProductos() {
       updatePagination();
     })
     .catch((error) => {
-      console.error("Error obteniendo los productos");
+      console.error("Error obteniendo los productos", error);
     });
 }
 
@@ -47,17 +47,11 @@ function updateProductDisplay(products, page) {
   paginatedProducts.forEach((product) => {
     const productHTML = `
             <div class="product">
-                <div class="product_image"><img src="images/${
-                  product.IdProduct
-                }.jpg" alt=""></div>
+                <div class="product_image"><img src="images/${product.IdProduct}.jpg" alt=""></div>
                 <div class="product_content clearfix mt-3">
                     <div class="product_info">
-                        <div class="product_name"><a href="product.html">${
-                          product.Name
-                        }</a></div>
-                        <div class="product_price">$${product.Price.toFixed(
-                          2
-                        )}</div>
+                        <div class="product_name"><a href="product.html?productId=${product.IdProduct}">${product.Name}</a></div>
+                        <div class="product_price">$${product.Price.toFixed(2)}</div>
                     </div>
                     <div class="product_options">
                         <div class="product_buy product_option"><img src="images/shopping-bag-white.svg" alt=""></div>
@@ -121,5 +115,5 @@ document.getElementById("search-input").addEventListener("input", (event) => {
   searchProducts(searchTerm);
 });
 
-// Llama a la función
 getProductos();
+
