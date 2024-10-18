@@ -35,6 +35,23 @@ function getProductos() {
     });
 }
 
+// Función para obtener productos
+function getProductosByCategory() {
+  const productsContainer = document.querySelector(".product-list");
+
+  database
+    .ref("Product")
+    .once("value")
+    .then((snapshot) => {
+      products = snapshot.val() ? Object.values(snapshot.val()) : [];
+      updateProductDisplay(products, currentPage);
+      updatePagination();
+    })
+    .catch((error) => {
+      console.error("Error obteniendo los productos");
+    });
+}
+
 // Función para mostrar los productos de la página actual
 function updateProductDisplay(products, page) {
   const productsContainer = document.querySelector(".producto_grid");
@@ -52,6 +69,39 @@ function updateProductDisplay(products, page) {
                     <div class="product_info">
                         <div class="product_name"><a href="product.html?productId=${product.IdProduct}">${product.Name}</a></div>
                         <div class="product_price">$${product.Price.toFixed(2)}</div>
+                    </div>
+                    <div class="product_options">
+                        <div class="product_buy product_option"><img src="images/shopping-bag-white.svg" alt=""></div>
+                        <div class="product_fav product_option">+</div>
+                    </div>
+                </div>
+            </div>`;
+    productsContainer.innerHTML += productHTML;
+  });
+}
+
+function updateProductDisplayCategory(products, page) {
+  const productsContainer = document.querySelector(".product-list");
+  productsContainer.innerHTML = ""; // Limpia el contenedor
+
+  const startIndex = (page - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedProducts = products.slice(startIndex, endIndex);
+
+  paginatedProducts.forEach((product) => {
+    const productHTML = `
+            <div class="product">
+                <div class="product_image"><img src="images/${
+                  product.IdProduct
+                }.jpg" alt=""></div>
+                <div class="product_content clearfix mt-3">
+                    <div class="product_info">
+                        <div class="product_name"><a href="product.html">${
+                          product.Name
+                        }</a></div>
+                        <div class="product_price">$${product.Price.toFixed(
+                          2
+                        )}</div>
                     </div>
                     <div class="product_options">
                         <div class="product_buy product_option"><img src="images/shopping-bag-white.svg" alt=""></div>
