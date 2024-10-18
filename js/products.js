@@ -1,26 +1,9 @@
-// Configuración de Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyDCjcyPOQ_29zyZGtxk13iJdbDsP1AG8bM",
-  authDomain: "home-pisos-vinilicos.firebaseapp.com",
-  databaseURL: "https://home-pisos-vinilicos-default-rtdb.firebaseio.com",
-  projectId: "home-pisos-vinilicos",
-  storageBucket: "home-pisos-vinilicos.appspot.com",
-  messagingSenderId: "392689672279",
-  appId: "1:392689672279:web:81245db39bf2e1dab7c312",
-  measurementId: "G-4HC6MV32X4",
-};
-
-// Inicializar Firebase
-firebase.initializeApp(firebaseConfig);
-const database = firebase.database();
-
 let currentPage = 1;
-const itemsPerPage = 6; 
+const itemsPerPage = 6;
 let products = [];
 
-// Función para obtener productos
 function getProductos() {
-  const productsContainer = document.querySelector(".producto_grid");
+  const productsContainer = document.querySelector(".product_grid");
 
   database
     .ref("Product")
@@ -35,7 +18,6 @@ function getProductos() {
     });
 }
 
-// Función para obtener productos
 function getProductosByCategory() {
   const productsContainer = document.querySelector(".product-list");
 
@@ -54,7 +36,7 @@ function getProductosByCategory() {
 
 // Función para mostrar los productos de la página actual
 function updateProductDisplay(products, page) {
-  const productsContainer = document.querySelector(".producto_grid");
+  const productsContainer = document.querySelector(".product_grid");
   productsContainer.innerHTML = ""; // Limpia el contenedor
 
   const startIndex = (page - 1) * itemsPerPage;
@@ -62,26 +44,35 @@ function updateProductDisplay(products, page) {
   const paginatedProducts = products.slice(startIndex, endIndex);
 
   paginatedProducts.forEach((product) => {
+    const mensajeWhatsapp = `Hola, me interesa este producto: $${product.Price} ${product.Name}`;
+    const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(mensajeWhatsapp)}`;
+
     const productHTML = `
-            <div class="product">
-                <div class="product_image"><img src="${product.ImageUrl}" alt=""></div>
-                <div class="product_content clearfix mt-3">
-                    <div class="product_info">
-                        <div class="product_name"><a href="product.html?productId=${product.IdProduct}">${product.Name}</a></div>
-                        <div class="product_price">$${product.Price.toFixed(2)}</div>
-                    </div>
-                    <div class="product_options">
-                        <div class="product_buy product_option"><img src="images/shopping-bag-white.svg" alt=""></div>
-                        <div class="product_fav product_option">+</div>
-                    </div>
-                </div>
-            </div>`;
+								<div class="product">
+									<div class="product_image"><img src="images/${product.IdProduct
+								}.jpg" alt=""></div>
+									<div class="product_content clearfix mt-3">
+										<div class="product_info">
+											<div class="product_name"><a href="product.html?productId=${product.IdProduct}">${product.Name}</a></div>
+											<div class="product_price">$${product.Price.toFixed(
+									2
+								)}</div>
+										</div>
+										<div class="product_options">
+											<div class="product_buy product_option">
+												<a href="${urlWhatsapp}" target="_blank" style="color: white; font-size: x-large;">
+												<i class="bi bi-whatsapp"></i>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>`;
     productsContainer.innerHTML += productHTML;
   });
 }
 
 function updateProductDisplayCategory(products, page) {
-  const productsContainer = document.querySelector(".product-list");
+  const productsContainer = document.querySelector(".product-grid");
   productsContainer.innerHTML = ""; // Limpia el contenedor
 
   const startIndex = (page - 1) * itemsPerPage;
@@ -91,17 +82,15 @@ function updateProductDisplayCategory(products, page) {
   paginatedProducts.forEach((product) => {
     const productHTML = `
             <div class="product">
-                <div class="product_image"><img src="images/${
-                  product.IdProduct
-                }.jpg" alt=""></div>
+                <div class="product_image"><img src="images/${product.IdProduct
+      }.jpg" alt=""></div>
                 <div class="product_content clearfix mt-3">
                     <div class="product_info">
-                        <div class="product_name"><a href="product.html">${
-                          product.Name
-                        }</a></div>
+                        <div class="product_name"><a href="product.html">${product.Name
+      }</a></div>
                         <div class="product_price">$${product.Price.toFixed(
-                          2
-                        )}</div>
+        2
+      )}</div>
                     </div>
                     <div class="product_options">
                         <div class="product_buy product_option"><img src="images/shopping-bag-white.svg" alt=""></div>
@@ -166,4 +155,3 @@ document.getElementById("search-input").addEventListener("input", (event) => {
 });
 
 getProductos();
-

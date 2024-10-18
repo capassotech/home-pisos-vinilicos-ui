@@ -1,12 +1,6 @@
 $(document).ready(function () {
   "use strict";
 
-  /* 
-
-    1. Vars and Inits
-
-    */
-
   var header = $(".header");
   var menuActive = false;
   var menu = $(".menu");
@@ -28,12 +22,6 @@ $(document).ready(function () {
   initQuantity();
   displayProductDetails(productId); // Llamar a la función para mostrar detalles del producto
 
-  /* 
-
-    2. Set Header
-
-    */
-
   function setHeader() {
     if ($(window).scrollTop() > 100) {
       header.addClass("scrolled");
@@ -41,12 +29,6 @@ $(document).ready(function () {
       header.removeClass("scrolled");
     }
   }
-
-  /* 
-
-    3. Init Menu
-
-    */
 
   function initMenu() {
     if ($(".menu").length) {
@@ -81,12 +63,6 @@ $(document).ready(function () {
     menuActive = false;
   }
 
-  /* 
-
-    4. Init Image
-
-    */
-
   function initImage() {
     var images = $(".product_image_thumbnail");
     var selected = $(".product_image_large img");
@@ -99,12 +75,6 @@ $(document).ready(function () {
       });
     });
   }
-
-  /* 
-
-    5. Init Quantity
-
-    */
 
   function initQuantity() {
     // Handle product quantity input
@@ -132,27 +102,7 @@ $(document).ready(function () {
     }
   }
 
-  /* 
-
-    6. Get Product Details
-
-    */
-
   function displayProductDetails(productId) {
-    // Inicializar Firebase
-    const firebaseConfig = {
-      apiKey: "AIzaSyDCjcyPOQ_29zyZGtxk13iJdbDsP1AG8bM",
-      authDomain: "home-pisos-vinilicos.firebaseapp.com",
-      databaseURL: "https://home-pisos-vinilicos-default-rtdb.firebaseio.com",
-      projectId: "home-pisos-vinilicos",
-      storageBucket: "home-pisos-vinilicos.appspot.com",
-      messagingSenderId: "392689672279",
-      appId: "1:392689672279:web:81245db39bf2e1dab7c312",
-      measurementId: "G-4HC6MV32X4",
-    };
-
-    // Inicializar Firebase
-    firebase.initializeApp(firebaseConfig);
     const database = firebase.database();
 
     database
@@ -161,6 +111,7 @@ $(document).ready(function () {
       .once("value")
       .then((snapshot) => {
         const product = snapshot.val();
+        console.log(product)
         if (product) {
           document.getElementById("productName").textContent = product.Name;
           document.getElementById("productDescription").textContent =
@@ -181,22 +132,21 @@ $(document).ready(function () {
           const categoriesContainer =
             document.getElementById("productCategories");
           categoriesContainer.innerHTML = ""; // Limpiar contenido anterior
-          console.log("IdCategory:", product.IdCategory);
 
           // Obtener el nombre de la categoría
-          database
-            .ref("Category")
-            .child(product.IdCategory)
-            .once("value")
-            .then((catSnapshot) => {
-              const category = catSnapshot.val();
-              if (category) {
-                categoriesContainer.innerHTML += `<li><a href="/productos">${category.Name}</a></li>`;
-              } else {
-                console.error("Categoría no encontrada");
-              }
-            });
-          loadColors(Colors);
+          // database
+          //   .ref("Category")
+          //   .child(product.IdCategory)
+          //   .once("value")
+          //   .then((catSnapshot) => {
+          //     const category = catSnapshot.val();
+          //     if (category) {
+          //       categoriesContainer.innerHTML += `<li><a href="/productos">${category.Name}</a></li>`;
+          //     } else {
+          //       console.error("Categoría no encontrada");
+          //     }
+          //   });
+          // loadColors(Colors);
         } else {
           console.error("Producto no encontrado");
         }
@@ -210,13 +160,13 @@ $(document).ready(function () {
 
   function loadColors(colors) {
     const colorSelect = document.getElementById("color_input");
-    colorSelect.innerHTML = ""; 
+    colorSelect.innerHTML = "";
 
     colors.forEach(color => {
-        const option = document.createElement("option");
-        option.value = color; // Nombre del color
-        option.textContent = color; // Mostrar el nombre del color
-        colorSelect.appendChild(option);
+      const option = document.createElement("option");
+      option.value = color; // Nombre del color
+      option.textContent = color; // Mostrar el nombre del color
+      colorSelect.appendChild(option);
     });
   }
 

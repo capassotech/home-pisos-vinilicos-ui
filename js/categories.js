@@ -1,27 +1,5 @@
-/* JS Document */
-
-/******************************
-
-[Table of Contents]
-
-1. Vars and Inits
-2. Set Header
-3. Init Menu
-4. Init Isotope
-5. Init Price Slider
-6. Init Products Height
-
-
-******************************/
-
 $(document).ready(function () {
 	"use strict";
-
-	/* 
-
-	1. Vars and Inits
-
-	*/
 
 	var header = $('.header');
 	var menuActive = false;
@@ -45,12 +23,6 @@ $(document).ready(function () {
 	initPriceSlider();
 	initProductsHeight();
 
-	/* 
-
-	2. Set Header
-
-	*/
-
 	function setHeader() {
 		if ($(window).scrollTop() > 100) {
 			header.addClass('scrolled');
@@ -61,18 +33,6 @@ $(document).ready(function () {
 	}
 
 	function loadFeaturedCategories() {
-		const firebaseConfig = {
-			apiKey: "AIzaSyDCjcyPOQ_29zyZGtxk13iJdbDsP1AG8bM",
-			authDomain: "home-pisos-vinilicos.firebaseapp.com",
-			databaseURL: "https://home-pisos-vinilicos-default-rtdb.firebaseio.com",
-			projectId: "home-pisos-vinilicos",
-			storageBucket: "home-pisos-vinilicos.appspot.com",
-			messagingSenderId: "392689672279",
-			appId: "1:392689672279:web:81245db39bf2e1dab7c312",
-			measurementId: "G-4HC6MV32X4"
-		};
-
-		firebase.initializeApp(firebaseConfig);
 		const database = firebase.database();
 
 		// Obtener las categorías desde Firebase
@@ -126,21 +86,6 @@ $(document).ready(function () {
 	document.addEventListener("DOMContentLoaded", loadFeaturedCategories);
 
 	function loadProductsByCategory() {
-		const firebaseConfig = {
-			apiKey: "AIzaSyDCjcyPOQ_29zyZGtxk13iJdbDsP1AG8bM",
-			authDomain: "home-pisos-vinilicos.firebaseapp.com",
-			databaseURL: "https://home-pisos-vinilicos-default-rtdb.firebaseio.com",
-			projectId: "home-pisos-vinilicos",
-			storageBucket: "home-pisos-vinilicos.appspot.com",
-			messagingSenderId: "392689672279",
-			appId: "1:392689672279:web:81245db39bf2e1dab7c312",
-			measurementId: "G-4HC6MV32X4"
-		};
-
-		// Inicializar Firebase solo si aún no está inicializado
-		if (!firebase.apps.length) {
-			firebase.initializeApp(firebaseConfig);
-		}
 		const database = firebase.database();
 
 		// Obtener el parámetro de categoría de la URL
@@ -152,6 +97,7 @@ $(document).ready(function () {
 			database.ref("Product").orderByChild("IdCategory").equalTo(categoryId).once("value")
 				.then((snapshot) => {
 					const products = snapshot.val();
+					console.log(products)
 
 					// Obtener la categoría seleccionada
 					database.ref("Category/" + categoryId).once("value")
@@ -166,21 +112,25 @@ $(document).ready(function () {
 					if (products) {
 						const productArray = Object.values(products);
 						productArray.forEach(product => {
+							const mensajeWhatsapp = `Hola, me interesa este producto: $${product.Price} ${product.Name}`;
+							const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(mensajeWhatsapp)}`;
 							const productHTML = `
 								<div class="product">
 									<div class="product_image"><img src="images/${product.IdProduct
-													}.jpg" alt=""></div>
+								}.jpg" alt=""></div>
 									<div class="product_content clearfix mt-3">
 										<div class="product_info">
-											<div class="product_name"><a href="product.html">${product.Name
-													}</a></div>
+											<div class="product_name"><a href="product.html?productId=${product.IdProduct}">${product.Name}</a></div>
 											<div class="product_price">$${product.Price.toFixed(
-														2
-													)}</div>
+									2
+								)}</div>
 										</div>
 										<div class="product_options">
-											<div class="product_buy product_option"><img src="images/shopping-bag-white.svg" alt=""></div>
-											<div class="product_fav product_option">+</div>
+											<div class="product_buy product_option">
+												<a href="${urlWhatsapp}" target="_blank" style="color: white; font-size: x-large;">
+												<i class="bi bi-whatsapp"></i>
+												</a>
+											</div>
 										</div>
 									</div>
 								</div>`;
@@ -193,18 +143,10 @@ $(document).ready(function () {
 				.catch((error) => {
 					console.error("Error al cargar los productos:", error);
 				});
-		} else {
-			document.getElementById("category-title").textContent = "Categoría no especificada.";
 		}
 	}
 
 	document.addEventListener("DOMContentLoaded", loadProductsByCategory);
-
-	/* 
-
-	3. Init Menu
-
-	*/
 
 	function initMenu() {
 		if ($('.menu').length) {
@@ -241,18 +183,12 @@ $(document).ready(function () {
 		menuActive = false;
 	}
 
-	/* 
-
-	4. Init Isotope
-
-	*/
-
 	function initIsotope() {
 		var sortingButtons = $('.product_sorting_btn');
 		var sortNums = $('.num_sorting_btn');
 
-		if ($('.producto_grid').length) {
-			var grid = $('.producto_grid').isotope({
+		if ($('.product_grid').length) {
+			var grid = $('.product_grid').isotope({
 				itemSelector: '.product',
 				layoutMode: 'fitRows',
 				getSortData:
@@ -322,17 +258,11 @@ $(document).ready(function () {
 					var numSortingText = $(this).text();
 					var numFilter = ':nth-child(-n+' + numSortingText + ')';
 					$('.num_sorting_text').text($(this).text());
-					$('.producto_grid').isotope({ filter: numFilter });
+					$('.product_grid').isotope({ filter: numFilter });
 				});
 			});
 		}
 	}
-
-	/* 
-
-	5. Init Price Slider
-
-	*/
 
 	function initPriceSlider() {
 		if ($("#slider-range").length) {
@@ -349,7 +279,7 @@ $(document).ready(function () {
 
 			$("#amount").val("$" + $("#slider-range").slider("values", 0) + " - $" + $("#slider-range").slider("values", 1));
 			$('.filter_price').on('mouseup', function () {
-				$('.producto_grid').isotope({
+				$('.product_grid').isotope({
 					filter: function () {
 						var priceRange = $('#amount').val();
 						var priceMin = parseFloat(priceRange.split('-')[0].replace('$', ''));
@@ -367,12 +297,6 @@ $(document).ready(function () {
 			});
 		}
 	}
-
-	/* 
-
-	6. Init Products Height
-
-	*/
 
 	function initProductsHeight() {
 		if ($('.sidebar_left').length) {

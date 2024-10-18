@@ -5,34 +5,32 @@
 	<title>PRODUCTOS | Venta y Colocación de Pisos Vinílicos, Flotantes y Decks</title>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="description" content="HOME PISOS se especializa en la venta y colocación de pisos vinílicos de PVC, pisos flotantes, decks y revestimientos de alta calidad.">
+	<meta name="description"
+		content="HOME PISOS se especializa en la venta y colocación de pisos vinílicos de PVC, pisos flotantes, decks y revestimientos de alta calidad.">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<!-- Keywords for SEO -->
-	<meta name="keywords" content="pisos vinílicos, pisos flotantes, decks, revestimientos, PVC, pisos resistentes al agua, instalación de pisos, HOME PISOS">
+	<meta name="keywords"
+		content="pisos vinílicos, pisos flotantes, decks, revestimientos, PVC, pisos resistentes al agua, instalación de pisos, HOME PISOS">
 
-	<!-- Author -->
 	<meta name="author" content="HOME PISOS">
 
-	<!-- Favicon -->
 	<link rel="icon" href="/images/logo-sin-fondo.png" type="image/x-icon">
 
-	<!-- Open Graph Meta Tags -->
 	<meta property="og:title" content="HOME PISOS | Venta y Colocación de Pisos Vinílicos, Flotantes y Decks">
-	<meta property="og:description" content="Encuentra pisos de PVC, flotantes, decks y revestimientos de alta calidad en HOME PISOS. Ofrecemos venta e instalación profesional.">
+	<meta property="og:description"
+		content="Encuentra pisos de PVC, flotantes, decks y revestimientos de alta calidad en HOME PISOS. Ofrecemos venta e instalación profesional.">
 	<meta property="og:type" content="website">
 	<meta property="og:url" content="https://home-pisos-vinilicos.web.app/">
 	<meta property="og:image" content="https://home-pisos-vinilicos.web.app/images/pisos_vinilicos.jpg">
 	<meta property="og:site_name" content="HOME PISOS">
-	
-	<!-- Twitter Card Meta Tags -->
+
 	<meta name="twitter:card" content="summary_large_image">
 	<meta name="twitter:title" content="HOME PISOS | Venta y Colocación de Pisos Vinílicos, Flotantes y Decks">
-	<meta name="twitter:description" content="Encuentra pisos de PVC, flotantes, decks y revestimientos de alta calidad en HOME PISOS. Ofrecemos venta e instalación profesional.">
+	<meta name="twitter:description"
+		content="Encuentra pisos de PVC, flotantes, decks y revestimientos de alta calidad en HOME PISOS. Ofrecemos venta e instalación profesional.">
 	<meta name="twitter:image" content="https://home-pisos-vinilicos.web.app/images/pisos_vinilicos.jpg">
 	<meta name="twitter:site" content="@homepisos">
-	
-	<!-- Stylesheets -->
+
 	<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
 	<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
@@ -40,10 +38,12 @@
 	<link rel="stylesheet" type="text/css" href="plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
 	<link rel="stylesheet" type="text/css" href="styles/categories.css">
 	<link rel="stylesheet" type="text/css" href="styles/categories_responsive.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+	<link rel="stylesheet" type="text/css" href="styles/main_styles.css">
+	<link rel="stylesheet" type="text/css" href="styles/responsive.css">
+
 	<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
-
-	
 </head>
 
 <body>
@@ -59,12 +59,12 @@
 						<li id="pvc-category"><a href="#"></a></li>
 						<li id="revestimientos-category"><a href="#"></a></li>
 						<li class="nav-item dropdown">
-    						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-       							data-bs-toggle="dropdown" aria-expanded="false">Más Productos
-    						</a>
-    						<ul class="dropdown-menu" id="more-products" aria-labelledby="navbarDropdown">
-        						<!-- Aquí se agregarán dinámicamente las categorías no destacadas -->
-    						</ul>
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+								data-bs-toggle="dropdown" aria-expanded="false">Más Productos
+							</a>
+							<ul class="dropdown-menu" id="more-products" aria-labelledby="navbarDropdown">
+								<!-- Aquí se agregarán dinámicamente las categorías no destacadas -->
+							</ul>
 						</li>
 						<li><a href="/contacto">Contacto</a></li>
 					</ul>
@@ -72,7 +72,8 @@
 				<div class="header_content ml-5">
 					<div class="search header_search">
 						<form action="#">
-							<input type="search" class="search_input" id="search-input" required="required" placeholder="Buscar productos...">
+							<input type="search" class="search_input" id="search-input" required="required"
+								placeholder="Buscar productos...">
 							<button type="submit" id="search_button" class="search_button"><img
 									src="images/magnifying-glass.svg" alt=""></button>
 						</form>
@@ -263,7 +264,7 @@
 
 					<div class="current_page">Woman's Fashion</div>
 				</div> -->
-				
+
 				<div class="col-12">
 					<div class="product_sorting clearfix">
 						<div class="view">
@@ -304,7 +305,7 @@
 
 				<div class="row products_container" id="products-container">
 					<div class="col">
-						<div class="producto_grid" id="product-grid">		
+						<div class="product_grid" id="product_grid">
 							<!-- Los productos se generarán aquí -->
 						</div>
 					</div>
@@ -317,41 +318,37 @@
 			<button id="next"><i class="fas fa-chevron-right"></i></button>
 		</div>
 
-		
-
 		<!-- Footer -->
 
-	</div  class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col text-center">
-					<div class="footer_logo"><a href="#"><img style="width: 100px;" src="images/logo.png" /></a>
-					</div>
-					<nav class="footer_nav">
-						<ul>
-							<li><a href="categories.html">Pisos de PVC</a></li>
-							<li><a href="categories.html">Revestimientos</a></li>
-							<li><a href="categories.html">Más Productos</a></li>
-							<li><a href="contact.html">Contacto</a></li>
-						</ul>
-					</nav>
-					<div class="footer_social">
-						<ul>
-							<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-							<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-						</ul>
-					</div>
-					<div class="copyright">
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						Copyright &copy;
-						<script>document.write(new Date().getFullYear());</script> All rights reserved | This
-						template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
-							href="https://colorlib.com" target="_blank">Colorlib</a>
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-					</div>
+	</div class="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col text-center">
+				<div class="footer_logo"><a href="#"><img style="width: 100px;" src="images/logo.png" /></a>
+				</div>
+				<nav class="footer_nav">
+					<ul>
+						<li><a href="categories.html">Pisos de PVC</a></li>
+						<li><a href="categories.html">Revestimientos</a></li>
+						<li><a href="categories.html">Más Productos</a></li>
+						<li><a href="contact.html">Contacto</a></li>
+					</ul>
+				</nav>
+				<div class="footer_social">
+					<ul>
+						<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+						<li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+					</ul>
+				</div>
+				<div class="copyright">
+					Copyright &copy;
+					<script>document.write(new Date().getFullYear());</script> All rights reserved | This
+					template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
+						href="https://colorlib.com" target="_blank">Colorlib</a>
 				</div>
 			</div>
 		</div>
+	</div>
 
 	<script src="js/jquery-3.2.1.min.js"></script>
 	<script src="styles/bootstrap4/popper.js"></script>
@@ -361,15 +358,13 @@
 	<script src="plugins/Isotope/isotope.pkgd.min.js"></script>
 	<script src="plugins/malihu-custom-scrollbar/jquery.mCustomScrollbar.js"></script>
 	<script src="plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-	<script src="js/categories_custom.js"></script>
-	<script src="js/main.js"></script>
 	<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
 	<script src="plugins/colorbox/jquery.colorbox-min.js"></script>
-	<script src="js/custom.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 	<script src="js/init_firebase.js"></script>
-	<script src="js/home.js"></script>
-	
+	<script src="js/products.js"></script>
+	<script src="js/categories.js"></script>
 </body>
 
 </html>
