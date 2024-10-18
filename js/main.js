@@ -47,7 +47,7 @@ function updateProductDisplay(products, page) {
   paginatedProducts.forEach((product) => {
     const productHTML = `
             <div class="product">
-                <div class="product_image"><img src="images/${product.IdProduct}.jpg" alt=""></div>
+                <div class="product_image"><img src="${product.ImageUrl}" alt=""></div>
                 <div class="product_content clearfix mt-3">
                     <div class="product_info">
                         <div class="product_name"><a href="product.html?productId=${product.IdProduct}">${product.Name}</a></div>
