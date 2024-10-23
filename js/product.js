@@ -5,7 +5,7 @@ $(document).ready(function () {
   var menuActive = false;
   var menu = $(".menu");
   var burger = $(".burger_container");
-  var productId = getUrlParameter("productId"); // Obtener productId de la URL
+  var productId = getUrlParameter("productId");
 
   setHeader();
 
@@ -20,7 +20,7 @@ $(document).ready(function () {
   initMenu();
   initImage();
   initQuantity();
-  displayProductDetails(productId); // Llamar a la función para mostrar detalles del producto
+  displayProductDetails(productId);
 
   function setHeader() {
     if ($(window).scrollTop() > 100) {
@@ -77,7 +77,6 @@ $(document).ready(function () {
   }
 
   function initQuantity() {
-    // Handle product quantity input
     if ($(".product_quantity").length) {
       var input = $("#quantity_input");
       var incButton = $("#quantity_inc_button");
@@ -111,7 +110,6 @@ $(document).ready(function () {
       .once("value")
       .then((snapshot) => {
         const product = snapshot.val();
-        console.log(product)
         if (product) {
           document.getElementById("productName").textContent = product.Name;
           document.getElementById("productDescription").textContent =
@@ -128,25 +126,25 @@ $(document).ready(function () {
             "productImage"
           ).src = product.ImageUrl;
 
-          // Mostrar categoría
           const categoriesContainer =
             document.getElementById("productCategories");
           categoriesContainer.innerHTML = ""; // Limpiar contenido anterior
 
-          // Obtener el nombre de la categoría
-          // database
-          //   .ref("Category")
-          //   .child(product.IdCategory)
-          //   .once("value")
-          //   .then((catSnapshot) => {
-          //     const category = catSnapshot.val();
-          //     if (category) {
-          //       categoriesContainer.innerHTML += `<li><a href="/productos">${category.Name}</a></li>`;
-          //     } else {
-          //       console.error("Categoría no encontrada");
-          //     }
-          //   });
-          // loadColors(Colors);
+          database
+            .ref("Category")
+            .child(product.IdCategory)
+            .once("value")
+            .then((catSnapshot) => {
+              const category = catSnapshot.val();
+              if (category) {
+                categoriesContainer.innerHTML += `
+                <li><a href="/productsByCategory.html?category=${category.IdCategory}">${category.Name}</a>
+                </li><li><a>${product.Name}</a></li>`;
+              } else {
+                console.error("Categoría no encontrada");
+              }
+            });
+          //loadColors(Colors);
         } else {
           console.error("Producto no encontrado");
         }
@@ -164,13 +162,12 @@ $(document).ready(function () {
 
     colors.forEach(color => {
       const option = document.createElement("option");
-      option.value = color; // Nombre del color
-      option.textContent = color; // Mostrar el nombre del color
+      option.value = color;
+      option.textContent = color;
       colorSelect.appendChild(option);
     });
   }
 
-  // Función para obtener el parámetro de la URL
   function getUrlParameter(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");

@@ -46,11 +46,11 @@ $(document).ready(function () {
 
 					if (featuredCategories.length > 0) {
 						if (featuredCategories[0]) {
-							document.getElementById("pvc-category").firstElementChild.textContent = featuredCategories[0].Name || "Pisos de PVC";
+							document.getElementById("pvc-category").firstElementChild.textContent = featuredCategories[0].Name;
 							document.getElementById("pvc-category").firstElementChild.href = `/productsByCategory.html?category=${featuredCategories[0].IdCategory}`; // Redirige con el ID de la categoría
 						}
 						if (featuredCategories[1]) {
-							document.getElementById("revestimientos-category").firstElementChild.textContent = featuredCategories[1].Name || "Revestimientos";
+							document.getElementById("revestimientos-category").firstElementChild.textContent = featuredCategories[1].Name;
 							document.getElementById("revestimientos-category").firstElementChild.href = `/productsByCategory.html?category=${featuredCategories[1].IdCategory}`; // Redirige con el ID de la categoría
 						}
 					} else {
@@ -95,7 +95,7 @@ $(document).ready(function () {
 					database.ref("Category/" + categoryId).once("value")
 						.then((categorySnapshot) => {
 							const category = categorySnapshot.val();
-							document.getElementById("category-title").textContent = "Productos de " + (category ? category.Name : "Categoría Desconocida");
+							document.getElementById("category-title").textContent = (category ? category.Name : "");
 						});
 
 					const productList = document.getElementById("product-list");
