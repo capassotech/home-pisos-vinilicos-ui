@@ -1,5 +1,28 @@
 {
-  "projects": {
-    "default": "home-pisos-vinilicos"
+  "hosting": {
+    "public": ".",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "/contacto",
+        "destination": "/contact.html"
+      },
+      {
+        "source": "/producto",
+        "destination": "/product.html"
+      },
+      {
+        "source": "/productos",
+        "destination": "/products.html"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
   }
 }

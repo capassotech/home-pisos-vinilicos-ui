@@ -114,11 +114,8 @@ $(document).ready(function () {
 
           document.getElementById("whatsappLink").addEventListener("click", function (event) {
             const currentUrl = window.location.href;
-
             const mensajeWhatsapp = `Hola, me interesa este producto: ${product.Name}.\n${currentUrl}`;
             const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(mensajeWhatsapp)}`;
-
-
             window.open(urlWhatsapp, '_blank');
           });
 
