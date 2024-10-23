@@ -112,16 +112,25 @@ $(document).ready(function () {
         const product = snapshot.val();
         if (product) {
           document.getElementById("productName").textContent = product.Name;
+          document.getElementById("productDimensions").textContent =
+            product.Dimensions || "";
+          document.getElementById("productTechnicalSheet").textContent =
+            product.TechnicalSheet || "";
           document.getElementById("productDescription").textContent =
-            product.Description || "Descripción no disponible.";
+            product.Description || "";
+          
+          var textPrice = "";
+          if(product.PricePerSquareMeter != null && product.PricePerSquareMeter != 0){
+            textPrice = `$${product.PricePerSquareMeter.toFixed(2)} x m2`;
+          }
+          else{
+            textPrice = `$${product.Price.toFixed(2)}`;
+          }
+
           document.getElementById(
             "productPrice"
-          ).textContent = `Precio: $${product.Price.toFixed(2)}`;
-          document.getElementById(
-            "productPriceM2"
-          ).textContent = `Precio por metro cuadrado $${product.PricePerSquareMeter.toFixed(
-            2
-          )}`;
+          ).textContent = textPrice;
+          
           document.getElementById(
             "productImage"
           ).src = product.ImageUrl;
@@ -138,8 +147,12 @@ $(document).ready(function () {
               const category = catSnapshot.val();
               if (category) {
                 categoriesContainer.innerHTML += `
-                <li><a href="/productsByCategory.html?category=${category.IdCategory}">${category.Name}</a>
-                </li><li><a>${product.Name}</a></li>`;
+                <li>
+                  <a href="/productsByCategory.html?category=${category.IdCategory}">${category.Name}</a>
+                </li>
+                <li>
+                  <a>${product.Name}</a>
+                </li>`;
               } else {
                 console.error("Categoría no encontrada");
               }
