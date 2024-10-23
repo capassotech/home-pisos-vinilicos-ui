@@ -126,7 +126,7 @@ $(document).ready(function () {
           )}`;
           document.getElementById(
             "productImage"
-          ).src = `images/${product.IdProduct}.jpg`;
+          ).src = product.ImageUrl;
 
           // Mostrar categoría
           const categoriesContainer =

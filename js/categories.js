@@ -35,7 +35,6 @@ $(document).ready(function () {
 	function loadFeaturedCategories() {
 		const database = firebase.database();
 
-		// Obtener las categorías desde Firebase
 		database.ref("Category").once("value")
 			.then((snapshot) => {
 				const categories = snapshot.val();
@@ -43,10 +42,8 @@ $(document).ready(function () {
 				if (categories) {
 					const categoryList = Object.values(categories);
 
-					// Filtrar las categorías destacadas
 					const featuredCategories = categoryList.filter(category => category.IsFeatured);
 
-					// Mostrar las categorías destacadas
 					if (featuredCategories.length > 0) {
 						if (featuredCategories[0]) {
 							document.getElementById("pvc-category").firstElementChild.textContent = featuredCategories[0].Name || "Pisos de PVC";
@@ -60,14 +57,13 @@ $(document).ready(function () {
 						console.error("No se encontraron categorías destacadas.");
 					}
 
-					// Filtrar las categorías no destacadas y mostrarlas en el menú desplegable
 					const nonFeaturedCategories = categoryList.filter(category => !category.IsFeatured);
 					const moreProductsMenu = document.getElementById("more-products");
 
 					nonFeaturedCategories.forEach(category => {
 						const li = document.createElement("li");
 						const a = document.createElement("a");
-						a.href = `/productsByCategory.html?category=${category.IdCategory}`;  // Redirige con el ID de la categoría
+						a.href = `/productsByCategory.html?category=${category.IdCategory}`;
 						a.textContent = category.Name;
 						a.classList.add("dropdown-item");
 						li.appendChild(a);
@@ -88,18 +84,14 @@ $(document).ready(function () {
 	function loadProductsByCategory() {
 		const database = firebase.database();
 
-		// Obtener el parámetro de categoría de la URL
 		const urlParams = new URLSearchParams(window.location.search);
 		const categoryId = urlParams.get('category');
 
 		if (categoryId) {
-			// Obtener los productos filtrados por categoría desde Firebase
 			database.ref("Product").orderByChild("IdCategory").equalTo(categoryId).once("value")
 				.then((snapshot) => {
 					const products = snapshot.val();
-					console.log(products)
 
-					// Obtener la categoría seleccionada
 					database.ref("Category/" + categoryId).once("value")
 						.then((categorySnapshot) => {
 							const category = categorySnapshot.val();
@@ -107,7 +99,7 @@ $(document).ready(function () {
 						});
 
 					const productList = document.getElementById("product-list");
-					productList.innerHTML = ''; // Limpiar la lista antes de agregar productos
+					productList.innerHTML = '';
 
 					if (products) {
 						const productArray = Object.values(products);
@@ -116,14 +108,15 @@ $(document).ready(function () {
 							const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(mensajeWhatsapp)}`;
 							const productHTML = `
 								<div class="product">
-									<div class="product_image"><img src="images/${product.IdProduct
-								}.jpg" alt=""></div>
+									<div class="product_image">
+										<img src="${product.ImageUrl}" alt="${product.Name}">
+									</div>
 									<div class="product_content clearfix mt-3">
 										<div class="product_info">
 											<div class="product_name"><a href="product.html?productId=${product.IdProduct}">${product.Name}</a></div>
 											<div class="product_price">$${product.Price.toFixed(
-									2
-								)}</div>
+								2
+							)}</div>
 										</div>
 										<div class="product_options">
 											<div class="product_buy product_option">
@@ -212,7 +205,6 @@ $(document).ready(function () {
 				}
 			});
 
-			// Sort based on the value from the sorting_type dropdown
 			sortingButtons.each(function () {
 				$(this).on('click', function () {
 					var parent = $(this).parent().parent().find('.sorting_text');
@@ -223,7 +215,6 @@ $(document).ready(function () {
 				});
 			});
 
-			// Change view to Box
 			if ($('.box_view').length) {
 				var box = $('.box_view');
 				box.on('click', function () {
@@ -236,7 +227,6 @@ $(document).ready(function () {
 				});
 			}
 
-			// Change view to List
 			if ($('.detail_view').length) {
 				var detail = $('.detail_view');
 				detail.on('click', function () {
@@ -252,7 +242,6 @@ $(document).ready(function () {
 				});
 			}
 
-			// Show only a selected number of items
 			sortNums.each(function () {
 				$(this).on('click', function () {
 					var numSortingText = $(this).text();

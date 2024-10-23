@@ -13,7 +13,7 @@ function obtenerProductosDestacados() {
           <div class="col-lg-4 product_col">
             <div class="product">
               <div class="product_image">
-                <img src="images/product_1.jpg" alt="${producto.Name}">
+                <img src="${producto.ImageUrl}" alt="${producto.Name}">
               </div>
               <div class="product_content clearfix">
                 <div class="product_info">

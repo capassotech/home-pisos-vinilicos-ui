@@ -49,14 +49,15 @@ function updateProductDisplay(products, page) {
 
     const productHTML = `
 								<div class="product">
-									<div class="product_image"><img src="images/${product.IdProduct
-								}.jpg" alt=""></div>
+									<div class="product_image">
+                    <img src="${product.ImageUrl}" alt="${product.Name}">
+                  </div>
 									<div class="product_content clearfix mt-3">
 										<div class="product_info">
 											<div class="product_name"><a href="product.html?productId=${product.IdProduct}">${product.Name}</a></div>
 											<div class="product_price">$${product.Price.toFixed(
-									2
-								)}</div>
+        2
+      )}</div>
 										</div>
 										<div class="product_options">
 											<div class="product_buy product_option">
@@ -78,12 +79,14 @@ function updateProductDisplayCategory(products, page) {
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedProducts = products.slice(startIndex, endIndex);
-
+  console.log(products)
   paginatedProducts.forEach((product) => {
+    
     const productHTML = `
             <div class="product">
-                <div class="product_image"><img src="images/${product.IdProduct
-      }.jpg" alt=""></div>
+                <div class="product_image">
+                  <img src="${product.ImageUrl}" alt="${product.Name}">
+                </div>
                 <div class="product_content clearfix mt-3">
                     <div class="product_info">
                         <div class="product_name"><a href="product.html">${product.Name
@@ -93,8 +96,11 @@ function updateProductDisplayCategory(products, page) {
       )}</div>
                     </div>
                     <div class="product_options">
-                        <div class="product_buy product_option"><img src="images/shopping-bag-white.svg" alt=""></div>
-                        <div class="product_fav product_option">+</div>
+                      <div class="product_buy product_option">
+                        <a href="${urlWhatsapp}" target="_blank" style="color: white; font-size: x-large;">
+                          <i class="bi bi-whatsapp"></i>
+                        </a>
+                      </div>
                     </div>
                 </div>
             </div>`;
