@@ -724,7 +724,7 @@ section {
 	min-height: 80vh !important;
 	padding-top: 94px;
 	background: #FFFFFF;
-	margin-bottom: 35%;
+	margin-bottom: 30px;
 }
 
 .current_page {
@@ -866,10 +866,10 @@ section {
 
 .products_container {
 	margin-top: 10px;
-
+	text-align: center;
 }
 
-.product-list .product_grid {
+.product-list {
 	width: 100%;
 	margin-left: 0;
 	display: flex;
@@ -882,7 +882,6 @@ section {
 .product {
 	flex: 1 1 calc(33.333% - 30px);
 	margin-bottom: 40px;
-	padding: 0 15px;
 }
 
 .product:nth-child(3n) {

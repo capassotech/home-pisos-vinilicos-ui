@@ -231,9 +231,7 @@
 
 @media only screen and (max-width: 768px)
 {
-	.product_grid{
-		display: block;
-	}
+	
 }
 
 /************
@@ -427,9 +425,6 @@
 		margin-bottom: 30px;
 	}
 	
-	.product_grid{
-		height: 100%;
-	}
 	.footer{
 		padding-top: 0px; 
 	}

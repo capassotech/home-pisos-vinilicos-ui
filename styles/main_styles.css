@@ -921,6 +921,7 @@ section {
 
 .products_container {
 	margin-top: 10px;
+	text-align: center;
 }
 
 .product_image {
@@ -1547,6 +1548,13 @@ section {
 
 .footer_social ul li a i:hover {
 	color: #e0e3e4;
+}
+
+.product_grid
+{
+	width: calc(100% + 30px);
+	margin-left: -15px;
+	display: ruby;
 }
 
 .copyright {
