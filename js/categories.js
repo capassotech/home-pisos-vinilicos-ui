@@ -46,30 +46,39 @@ $(document).ready(function () {
 
 					if (featuredCategories.length > 0) {
 						if (featuredCategories[0]) {
-							document.getElementById("pvc-category").firstElementChild.textContent = featuredCategories[0].Name;
-							document.getElementById("pvc-category").firstElementChild.href = `/productsByCategory.html?category=${featuredCategories[0].IdCategory}`; // Redirige con el ID de la categoría
+							document.getElementById("category-1").firstElementChild.textContent = featuredCategories[0].Name;
+							document.getElementById("category-1").firstElementChild.href = `/productsByCategory.html?category=${featuredCategories[0].IdCategory}`;
 						}
 						if (featuredCategories[1]) {
-							document.getElementById("revestimientos-category").firstElementChild.textContent = featuredCategories[1].Name;
-							document.getElementById("revestimientos-category").firstElementChild.href = `/productsByCategory.html?category=${featuredCategories[1].IdCategory}`; // Redirige con el ID de la categoría
+							document.getElementById("category-2").firstElementChild.textContent = featuredCategories[1].Name;
+							document.getElementById("category-2").firstElementChild.href = `/productsByCategory.html?category=${featuredCategories[1].IdCategory}`;
 						}
 					} else {
 						console.error("No se encontraron categorías destacadas.");
 					}
 
 					const nonFeaturedCategories = categoryList.filter(category => !category.IsFeatured);
-					const moreProductsMenu = document.getElementById("more-products");
 
-					nonFeaturedCategories.forEach(category => {
-						const li = document.createElement("li");
-						const a = document.createElement("a");
-						a.href = `/productsByCategory.html?category=${category.IdCategory}`;
-						a.textContent = category.Name;
-						a.classList.add("dropdown-item");
-						li.appendChild(a);
-						moreProductsMenu.appendChild(li);
-					});
+					// Si hay más de 2 categorías no destacadas, mostrar el dropdown
+					if (nonFeaturedCategories.length > 2) {
+						const moreProductsMenu = document.getElementById("more-products");
 
+						nonFeaturedCategories.forEach(category => {
+							const li = document.createElement("li");
+							const a = document.createElement("a");
+							a.href = `/productsByCategory.html?category=${category.IdCategory}`;
+							a.textContent = category.Name;
+							a.classList.add("dropdown-item");
+							li.appendChild(a);
+							moreProductsMenu.appendChild(li);
+						});
+					} else {
+						// Si hay 2 o menos categorías no destacadas, ocultar o eliminar el dropdown
+						const dropdownItem = document.querySelector('.nav-item.dropdown');
+						if (dropdownItem) {
+							dropdownItem.style.display = 'none';
+						}
+					}
 				} else {
 					console.error("No se encontraron categorías.");
 				}
