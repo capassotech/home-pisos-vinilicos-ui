@@ -141,7 +141,7 @@ $(document).ready(function () {
 
           document.getElementById(
             "productImage"
-          ).src = product.ImageUrl;
+          ).src = product.ImageUrl ? product.ImageUrl : 'images/producto-sin-imagen.png';
 
           const categoriesContainer =
             document.getElementById("productCategories");
