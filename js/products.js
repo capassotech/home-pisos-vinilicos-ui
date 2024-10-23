@@ -50,7 +50,7 @@ function updateProductDisplay(products, page) {
     const productHTML = `
 								<div class="product">
 									<div class="product_image">
-                    <img src="${producto.ImageUrl ? producto.ImageUrl : 'images/producto-sin-imagen.png'}" alt="${producto.Name}">
+                    <img src="${product.ImageUrl ? product.ImageUrl : 'images/producto-sin-imagen.png'}" alt="${product.Name}">
                   </div>
 									<div class="product_content clearfix mt-3">
 										<div class="product_info">
@@ -83,7 +83,7 @@ function updateProductDisplayCategory(products, page) {
     const productHTML = `
             <div class="product">
 									<div class="product_image">
-                    <img src="${producto.ImageUrl ? producto.ImageUrl : 'images/producto-sin-imagen.png'}" alt="${producto.Name}">
+                    <img src="${product.ImageUrl ? product.ImageUrl : 'images/producto-sin-imagen.png'}" alt="${producto.Name}">
                   </div>
 									<div class="product_content clearfix mt-3">
 										<div class="product_info">

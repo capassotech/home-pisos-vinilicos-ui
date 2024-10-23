@@ -104,12 +104,13 @@ $(document).ready(function () {
 					if (products) {
 						const productArray = Object.values(products);
 						productArray.forEach(product => {
-							const mensajeWhatsapp = `Hola, me interesa este producto: $${product.Price} ${product.Name}`;
+							const currentUrl = window.location.href;
+							const mensajeWhatsapp = `Hola, me interesa este producto: ${product.Name}.\n${currentUrl}`;
 							const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(mensajeWhatsapp)}`;
 							const productHTML = `
 								<div class="product">
 									<div class="product_image">
-										<img src="${producto.ImageUrl ? producto.ImageUrl : 'images/producto-sin-imagen.png'}" alt="${producto.Name}">
+										<img src="${product.ImageUrl ? product.ImageUrl : 'images/producto-sin-imagen.png'}" alt="${product.Name}">
 									</div>
 									<div class="product_content clearfix mt-3">
 										<div class="product_info">

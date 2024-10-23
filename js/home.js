@@ -6,7 +6,8 @@ function obtenerProductosDestacados() {
     productosContainer.innerHTML = '';
     snapshot.forEach((childSnapshot) => {
       const producto = childSnapshot.val();
-      const mensajeWhatsapp = `Hola, me interesa este producto: $${producto.Price} ${producto.Name}`;
+      const currentUrl = window.location.href;
+      const mensajeWhatsapp = `Hola, me interesa este producto: ${producto.Name}.\n${currentUrl}`;
       const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(mensajeWhatsapp)}`;
 
       productosContainer.innerHTML += `
