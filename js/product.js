@@ -111,6 +111,17 @@ $(document).ready(function () {
       .then((snapshot) => {
         const product = snapshot.val();
         if (product) {
+
+          document.getElementById("whatsappLink").addEventListener("click", function (event) {
+            const currentUrl = window.location.href;
+
+            const mensajeWhatsapp = `Hola, me interesa este producto: ${product.Name}.\n${currentUrl}`;
+            const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(mensajeWhatsapp)}`;
+
+
+            window.open(urlWhatsapp, '_blank');
+          });
+
           document.getElementById("productName").textContent = product.Name;
           document.getElementById("productDimensions").textContent =
             product.Dimensions || "";
@@ -118,19 +129,19 @@ $(document).ready(function () {
             product.TechnicalSheet || "";
           document.getElementById("productDescription").textContent =
             product.Description || "";
-          
+
           var textPrice = "";
-          if(product.PricePerSquareMeter != null && product.PricePerSquareMeter != 0){
+          if (product.PricePerSquareMeter != null && product.PricePerSquareMeter != 0) {
             textPrice = `$${product.PricePerSquareMeter.toFixed(2)} x m2`;
           }
-          else{
+          else {
             textPrice = `$${product.Price.toFixed(2)}`;
           }
 
           document.getElementById(
             "productPrice"
           ).textContent = textPrice;
-          
+
           document.getElementById(
             "productImage"
           ).src = product.ImageUrl;
