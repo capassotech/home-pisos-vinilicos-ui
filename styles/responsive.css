@@ -133,7 +133,9 @@
 	.extra_promo {
 		width: 100%;
 		height: 616px;
-		float: none;
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 
 	.extra_promo_1 {
