@@ -37,6 +37,11 @@ function updateProductDisplay(products, page) {
   const endIndex = startIndex + itemsPerPage;
   const paginatedProducts = products.slice(startIndex, endIndex);
 
+  if (paginatedProducts.length === 0) {
+    productsContainer.innerHTML = `<p>No se encontraron productos.</p>`;
+    return;
+  }
+
   paginatedProducts.forEach((product) => {
     const mensajeWhatsapp = `Hola, me interesa este producto: $${product.Price} ${product.Name}`;
     const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(mensajeWhatsapp)}`;
@@ -79,7 +84,6 @@ function searchProducts(searchTerm) {
   currentPage = 1;
   updateProductDisplay(filteredProducts, currentPage);
   updatePagination();
-
 }
 
 // Manejar la búsqueda cuando el usuario escribe en el campo de búsqueda
