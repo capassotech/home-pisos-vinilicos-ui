@@ -2,6 +2,7 @@ let currentPage = 1;
 const itemsPerPage = 6;
 let products = [];
 
+// Función para obtener los productos desde Firebase
 function getProductos() {
   const productsContainer = document.querySelector(".product_grid");
 
@@ -12,98 +13,86 @@ function getProductos() {
       products = snapshot.val() ? Object.values(snapshot.val()) : [];
       updateProductDisplay(products, currentPage);
       updatePagination();
+
+      // Después de cargar los productos, verificar si hay un término de búsqueda en la URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const searchTerm = urlParams.get('search');
+
+      if (searchTerm) {
+        document.getElementById("search-input").value = searchTerm; 
+        searchProducts(searchTerm); 
+      }
     })
     .catch((error) => {
       console.error("Error obteniendo los productos", error);
     });
 }
 
-function getProductosByCategory() {
-  const productsContainer = document.querySelector(".product-list");
-
-  database
-    .ref("Product")
-    .once("value")
-    .then((snapshot) => {
-      products = snapshot.val() ? Object.values(snapshot.val()) : [];
-      updateProductDisplay(products, currentPage);
-      updatePagination();
-    })
-    .catch((error) => {
-      console.error("Error obteniendo los productos");
-    });
-}
-
 // Función para mostrar los productos de la página actual
 function updateProductDisplay(products, page) {
   const productsContainer = document.querySelector(".product_grid");
-  productsContainer.innerHTML = ""; // Limpia el contenedor
+  productsContainer.innerHTML = ""; 
 
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedProducts = products.slice(startIndex, endIndex);
+
+  if (paginatedProducts.length === 0) {
+    productsContainer.innerHTML = `<p>No se encontraron productos.</p>`;
+    return;
+  }
 
   paginatedProducts.forEach((product) => {
     const mensajeWhatsapp = `Hola, me interesa este producto: $${product.Price} ${product.Name}`;
     const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(mensajeWhatsapp)}`;
 
     const productHTML = `
-								<div class="product">
-									<div class="product_image">
-                    <img src="${product.ImageUrl ? product.ImageUrl : 'images/producto-sin-imagen.png'}" alt="${product.Name}">
-                  </div>
-									<div class="product_content clearfix mt-3">
-										<div class="product_info">
-											<div class="product_name"><a href="product.html?productId=${product.IdProduct}">${product.Name}</a></div>
-											<div class="product_price">$${product.Price.toFixed(2)}</div>
-										</div>
-										<div class="product_options">
-											<div class="product_buy product_option">
-												<a href="${urlWhatsapp}" target="_blank" style="color: white; font-size: x-large;">
-												<i class="bi bi-whatsapp"></i>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>`;
+      <div class="product">
+        <div class="product_image">
+          <img src="${product.ImageUrl ? product.ImageUrl : 'images/producto-sin-imagen.png'}" alt="${product.Name}">
+        </div>
+        <div class="product_content clearfix mt-3">
+          <div class="product_info">
+            <div class="product_name"><a href="product.html?productId=${product.IdProduct}">${product.Name}</a></div>
+            <div class="product_price">$${product.Price.toFixed(2)}</div>
+          </div>
+          <div class="product_options">
+            <div class="product_buy product_option">
+              <a href="${urlWhatsapp}" target="_blank" style="color: white; font-size: x-large;">
+                <i class="bi bi-whatsapp"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>`;
     productsContainer.innerHTML += productHTML;
   });
 }
 
-function updateProductDisplayCategory(products, page) {
-  const productsContainer = document.querySelector(".product-grid");
-  productsContainer.innerHTML = ""; // Limpia el contenedor
-
-  const startIndex = (page - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const paginatedProducts = products.slice(startIndex, endIndex);
-  console.log(products)
-  paginatedProducts.forEach((product) => {
-
-    const productHTML = `
-            <div class="product">
-									<div class="product_image">
-                    <img src="${product.ImageUrl ? product.ImageUrl : 'images/producto-sin-imagen.png'}" alt="${producto.Name}">
-                  </div>
-									<div class="product_content clearfix mt-3">
-										<div class="product_info">
-											<div class="product_name"><a href="product.html?productId=${product.IdProduct}">${product.Name}</a></div>
-											<div class="product_price">$${product.Price.toFixed(2)}</div>
-										</div>
-										<div class="product_options">
-											<div class="product_buy product_option">
-												<a href="${urlWhatsapp}" target="_blank" style="color: white; font-size: x-large;">
-												<i class="bi bi-whatsapp"></i>
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>`;
-    productsContainer.innerHTML += productHTML;
+// Función de búsqueda
+function searchProducts(searchTerm) {
+  searchTerm = searchTerm.toLowerCase();
+  const filteredProducts = products.filter((product) => {
+    return Object.values(product).some((value) => {
+      if (typeof value === "string") {
+        return value.toLowerCase().includes(searchTerm);
+      }
+      return false;
+    });
   });
+
+  currentPage = 1;
+  updateProductDisplay(filteredProducts, currentPage);
+  updatePagination();
 }
 
-// Funciones para manejar el paginado
+// Manejar la búsqueda cuando el usuario escribe en el campo de búsqueda
+document.getElementById("search-input").addEventListener("input", (event) => {
+  const searchTerm = event.target.value;
+  searchProducts(searchTerm);
+});
+
+// Función de paginación
 function updatePagination() {
   const pageInfo = document.getElementById("page-info");
   const prevButton = document.getElementById("prev");
@@ -116,6 +105,7 @@ function updatePagination() {
   nextButton.disabled = currentPage === totalPages;
 }
 
+// Eventos para la paginación
 document.getElementById("prev").addEventListener("click", () => {
   if (currentPage > 1) {
     currentPage--;
@@ -133,26 +123,5 @@ document.getElementById("next").addEventListener("click", () => {
   }
 });
 
-// Función de búsqueda
-function searchProducts(searchTerm) {
-  searchTerm = searchTerm.toLowerCase();
-  filteredProducts = products.filter((product) => {
-    return Object.values(product).some((value) => {
-      if (typeof value === "string") {
-        return value.toLowerCase().includes(searchTerm);
-      }
-      return false;
-    });
-  });
-
-  currentPage = 1;
-  updateProductDisplay(filteredProducts, currentPage);
-  updatePagination();
-}
-
-document.getElementById("search-input").addEventListener("input", (event) => {
-  const searchTerm = event.target.value;
-  searchProducts(searchTerm);
-});
-
+// Llamada inicial para obtener los productos
 getProductos();

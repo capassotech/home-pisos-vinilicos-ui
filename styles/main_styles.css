@@ -406,6 +406,7 @@ section {
 	-ms-transform: translateY(2px);
 	-o-transform: translateY(2px);
 	transform: translateY(2px);
+	margin-left: 300px;
 }
 
 .search_input {
