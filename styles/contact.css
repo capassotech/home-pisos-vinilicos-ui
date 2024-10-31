@@ -385,8 +385,7 @@ section
 3.3 Header - Search
 *********************************/
 
-.search
-{
+.search {
 	display: inline-block;
 	width: 400px;
 	-webkit-transform: translateY(2px);
@@ -394,9 +393,10 @@ section
 	-ms-transform: translateY(2px);
 	-o-transform: translateY(2px);
 	transform: translateY(2px);
+	margin-left: 300px;
 }
-.search_input
-{
+
+.search_input {
 	width: 100%;
 	height: 43px;
 	background: #f9f5f5;
@@ -404,8 +404,8 @@ section
 	outline: none;
 	padding-left: 20px;
 }
-.search_button
-{
+
+.search_button {
 	position: absolute;
 	top: 45%;
 	-webkit-transform: translateY(-50%);
@@ -420,15 +420,14 @@ section
 	border: none;
 	outline: none;
 }
-.search_button:focus
-{
+
+.search_button:focus {
 	outline: none !important;
 }
-.search_button img
-{
+
+.search_button img {
 	max-width: 100%;
 }
-
 /*********************************
 3.4 Header - Shopping
 *********************************/
