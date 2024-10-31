@@ -156,10 +156,10 @@ $(document).ready(function () {
               if (category) {
                 categoriesContainer.innerHTML += `
                 <li>
-                  <a href="/productsByCategory.html?category=${category.IdCategory}">${category.Name}</a>
+                  <a style="font-family: 'Open Sans', sans-serif;" href="/productsByCategory.html?category=${category.IdCategory}">${category.Name}</a>
                 </li>
                 <li>
-                  <a>${product.Name}</a>
+                  <a style="font-family: 'Open Sans', sans-serif;">${product.Name}</a>
                 </li>`;
               } else {
                 console.error("Categoría no encontrada");
