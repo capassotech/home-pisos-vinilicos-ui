@@ -104,7 +104,7 @@ $(document).ready(function () {
             document.getElementById("productImage").src = product.ImageUrls[0];
             const thumbnailContainer = document.getElementById("imageThumbnails");
             thumbnailContainer.innerHTML = ""; 
-            product.ImageUrls.slice(1).forEach((url) => {
+            product.ImageUrls.slice(0).forEach((url) => {
               const img = document.createElement("img");
               img.src = url;
               img.className = "product_image_thumbnail";
