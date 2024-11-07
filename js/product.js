@@ -18,7 +18,6 @@ $(document).ready(function () {
   });
 
   initMenu();
-  initImage();
   initQuantity();
   displayProductDetails(productId);
 
@@ -32,7 +31,6 @@ $(document).ready(function () {
 
   function initMenu() {
     if ($(".menu").length) {
-      var menu = $(".menu");
       if ($(".burger_container").length) {
         burger.on("click", function () {
           if (menuActive) {
@@ -63,19 +61,6 @@ $(document).ready(function () {
     menuActive = false;
   }
 
-  function initImage() {
-    var images = $(".product_image_thumbnail");
-    var selected = $(".product_image_large img");
-
-    images.each(function () {
-      var image = $(this);
-      image.on("click", function () {
-        var imagePath = new String(image.data("image"));
-        selected.attr("src", imagePath);
-      });
-    });
-  }
-
   function initQuantity() {
     if ($(".product_quantity").length) {
       var input = $("#quantity_input");
@@ -103,7 +88,7 @@ $(document).ready(function () {
 
   function displayProductDetails(productId) {
     const database = firebase.database();
-
+  
     database
       .ref("Product")
       .child(productId)
@@ -111,61 +96,26 @@ $(document).ready(function () {
       .then((snapshot) => {
         const product = snapshot.val();
         if (product) {
-
-          document.getElementById("whatsappLink").addEventListener("click", function (event) {
-            const currentUrl = window.location.href;
-            const mensajeWhatsapp = `Hola, me interesa este producto: ${product.Name}.\n${currentUrl}`;
-            const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(mensajeWhatsapp)}`;
-            window.open(urlWhatsapp, '_blank');
-          });
-
           document.getElementById("productName").textContent = product.Name;
-          document.getElementById("productDimensions").textContent =
-            product.Dimensions || "";
-          document.getElementById("productTechnicalSheet").textContent =
-            product.TechnicalSheet || "";
-          document.getElementById("productDescription").textContent =
-            product.Description || "";
-
-          var textPrice = "";
-          if (product.PricePerSquareMeter != null && product.PricePerSquareMeter != 0) {
-            textPrice = `$${product.PricePerSquareMeter.toFixed(2)} x m2`;
-          }
-          else {
-            textPrice = `$${product.Price.toFixed(2)}`;
-          }
-
-          document.getElementById(
-            "productPrice"
-          ).textContent = textPrice;
-
-          document.getElementById(
-            "productImage"
-          ).src = product.ImageUrl ? product.ImageUrl : 'images/producto-sin-imagen.png';
-
-          const categoriesContainer =
-            document.getElementById("productCategories");
-          categoriesContainer.innerHTML = ""; // Limpiar contenido anterior
-
-          database
-            .ref("Category")
-            .child(product.IdCategory)
-            .once("value")
-            .then((catSnapshot) => {
-              const category = catSnapshot.val();
-              if (category) {
-                categoriesContainer.innerHTML += `
-                <li>
-                  <a style="font-family: 'Open Sans', sans-serif;" href="/productsByCategory.html?category=${category.IdCategory}">${category.Name}</a>
-                </li>
-                <li>
-                  <a style="font-family: 'Open Sans', sans-serif;">${product.Name}</a>
-                </li>`;
-              } else {
-                console.error("Categoría no encontrada");
-              }
+          document.getElementById("productPrice").textContent = `$${product.Price || "Precio no disponible"}`;
+          document.getElementById("productDescription").textContent = product.Description || "";
+  
+          if (product.ImageUrls && product.ImageUrls.length > 0) {
+            document.getElementById("productImage").src = product.ImageUrls[0];
+            const thumbnailContainer = document.getElementById("imageThumbnails");
+            thumbnailContainer.innerHTML = ""; 
+            product.ImageUrls.slice(0).forEach((url) => {
+              const img = document.createElement("img");
+              img.src = url;
+              img.className = "product_image_thumbnail";
+              img.onclick = function () {
+                document.getElementById("productImage").src = url;
+              };
+              thumbnailContainer.appendChild(img);
             });
-          //loadColors(Colors);
+          } else {
+            document.getElementById("productImage").src = "images/producto-sin-imagen.png";
+          }
         } else {
           console.error("Producto no encontrado");
         }
@@ -174,21 +124,6 @@ $(document).ready(function () {
         console.error("Error obteniendo el producto:", error);
       });
   }
-
-  let Colors = ["Rojo", "Verde", "Azul"];
-
-  function loadColors(colors) {
-    const colorSelect = document.getElementById("color_input");
-    colorSelect.innerHTML = "";
-
-    colors.forEach(color => {
-      const option = document.createElement("option");
-      option.value = color;
-      option.textContent = color;
-      colorSelect.appendChild(option);
-    });
-  }
-
   function getUrlParameter(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");

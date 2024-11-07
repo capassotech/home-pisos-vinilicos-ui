@@ -13,8 +13,6 @@ function getProductos() {
       products = snapshot.val() ? Object.values(snapshot.val()) : [];
       updateProductDisplay(products, currentPage);
       updatePagination();
-
-      // Después de cargar los productos, verificar si hay un término de búsqueda en la URL
       const urlParams = new URLSearchParams(window.location.search);
       const searchTerm = urlParams.get('search');
 
@@ -32,24 +30,25 @@ function getProductos() {
 function updateProductDisplay(products, page) {
   const productsContainer = document.querySelector(".product_grid");
   productsContainer.innerHTML = ""; 
-
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedProducts = products.slice(startIndex, endIndex);
-
   if (paginatedProducts.length === 0) {
     productsContainer.innerHTML = `<p>No se encontraron productos.</p>`;
     return;
   }
-
   paginatedProducts.forEach((product) => {
     const mensajeWhatsapp = `Hola, me interesa este producto: $${product.Price} ${product.Name}`;
     const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(mensajeWhatsapp)}`;
 
+    const imageUrl = product.ImageUrls && product.ImageUrls.length > 0 
+      ? product.ImageUrls[0]  // Usa la primera imagen en ImageUrls
+      : 'images/producto-sin-imagen.png';
+
     const productHTML = `
       <div class="product">
         <div class="product_image">
-          <img src="${product.ImageUrl ? product.ImageUrl : 'images/producto-sin-imagen.png'}" alt="${product.Name}">
+          <img src="${imageUrl}" alt="${product.Name}">
         </div>
         <div class="product_content clearfix mt-3">
           <div class="product_info">
