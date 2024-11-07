@@ -13,8 +13,6 @@ function getProductos() {
       products = snapshot.val() ? Object.values(snapshot.val()) : [];
       updateProductDisplay(products, currentPage);
       updatePagination();
-
-      // Verificar si hay un término de búsqueda en la URL
       const urlParams = new URLSearchParams(window.location.search);
       const searchTerm = urlParams.get('search');
 
@@ -32,16 +30,13 @@ function getProductos() {
 function updateProductDisplay(products, page) {
   const productsContainer = document.querySelector(".product_grid");
   productsContainer.innerHTML = ""; 
-
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedProducts = products.slice(startIndex, endIndex);
-
   if (paginatedProducts.length === 0) {
     productsContainer.innerHTML = `<p>No se encontraron productos.</p>`;
     return;
   }
-
   paginatedProducts.forEach((product) => {
     const mensajeWhatsapp = `Hola, me interesa este producto: $${product.Price} ${product.Name}`;
     const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(mensajeWhatsapp)}`;

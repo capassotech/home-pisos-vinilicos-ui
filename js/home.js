@@ -9,12 +9,14 @@ function obtenerProductosDestacados() {
       const currentUrl = window.location.href;
       const mensajeWhatsapp = `Hola, me interesa este producto: ${producto.Name}.\n${currentUrl}`;
       const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(mensajeWhatsapp)}`;
-
+      const imageUrl = producto.ImageUrls && producto.ImageUrls.length > 0
+        ? producto.ImageUrls[0]
+        : 'images/producto-sin-imagen.png';
       productosContainer.innerHTML += `
           <div class="col-lg-4 product_col">
             <div class="product">
               <div class="product_image">
-                <img src="${producto.ImageUrl ? producto.ImageUrl : 'images/producto-sin-imagen.png'}" alt="${producto.Name}">
+                <img src="${imageUrl}" alt="${producto.Name}">
               </div>
               <div class="product_content clearfix">
                 <div class="product_info">

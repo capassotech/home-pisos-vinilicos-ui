@@ -92,41 +92,48 @@ $(document).ready(function () {
 
 	function loadProductsByCategory() {
 		const database = firebase.database();
-
+	
 		const urlParams = new URLSearchParams(window.location.search);
 		const categoryId = urlParams.get('category');
-
+	
 		if (categoryId) {
 			database.ref("Product").orderByChild("IdCategory").equalTo(categoryId).once("value")
 				.then((snapshot) => {
 					const products = snapshot.val();
-
+	
 					database.ref("Category/" + categoryId).once("value")
 						.then((categorySnapshot) => {
 							const category = categorySnapshot.val();
 							document.getElementById("category-title").textContent = (category ? category.Name : "");
 						});
-
+	
 					const productList = document.getElementById("product-list");
 					productList.innerHTML = '';
-
+	
 					if (products) {
 						const productArray = Object.values(products);
 						productArray.forEach(product => {
 							const currentUrl = window.location.href;
 							const mensajeWhatsapp = `Hola, me interesa este producto: ${product.Name}.\n${currentUrl}`;
 							const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(mensajeWhatsapp)}`;
+	
+							// Obtener la primera imagen de la lista de imágenes
+							let imageUrl = 'images/producto-sin-imagen.png';
+							if (product.ImageUrls && product.ImageUrls.length > 0) {
+								imageUrl = product.ImageUrls[0];
+							} else if (product.ImageUrl) {
+								imageUrl = product.ImageUrl;
+							}
+	
 							const productHTML = `
 								<div class="product">
 									<div class="product_image">
-										<img src="${product.ImageUrl ? product.ImageUrl : 'images/producto-sin-imagen.png'}" alt="${product.Name}">
+										<img src="${imageUrl}" alt="${product.Name}">
 									</div>
 									<div class="product_content clearfix mt-3">
 										<div class="product_info">
 											<div class="product_name"><a href="product.html?productId=${product.IdProduct}">${product.Name}</a></div>
-											<div class="product_price">$${product.Price.toFixed(
-								2
-							)}</div>
+											<div class="product_price">$${product.Price.toFixed(2)}</div>
 										</div>
 										<div class="product_options">
 											<div class="product_buy product_option">
