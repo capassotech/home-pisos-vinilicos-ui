@@ -14,7 +14,7 @@ function getProductos() {
       updateProductDisplay(products, currentPage);
       updatePagination();
 
-      // Después de cargar los productos, verificar si hay un término de búsqueda en la URL
+      // Verificar si hay un término de búsqueda en la URL
       const urlParams = new URLSearchParams(window.location.search);
       const searchTerm = urlParams.get('search');
 
@@ -46,10 +46,14 @@ function updateProductDisplay(products, page) {
     const mensajeWhatsapp = `Hola, me interesa este producto: $${product.Price} ${product.Name}`;
     const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(mensajeWhatsapp)}`;
 
+    const imageUrl = product.ImageUrls && product.ImageUrls.length > 0 
+      ? product.ImageUrls[0]  // Usa la primera imagen en ImageUrls
+      : 'images/producto-sin-imagen.png';
+
     const productHTML = `
       <div class="product">
         <div class="product_image">
-          <img src="${product.ImageUrl ? product.ImageUrl : 'images/producto-sin-imagen.png'}" alt="${product.Name}">
+          <img src="${imageUrl}" alt="${product.Name}">
         </div>
         <div class="product_content clearfix mt-3">
           <div class="product_info">

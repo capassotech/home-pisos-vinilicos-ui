@@ -18,7 +18,6 @@ $(document).ready(function () {
   });
 
   initMenu();
-  initImage();
   initQuantity();
   displayProductDetails(productId);
 
@@ -32,7 +31,6 @@ $(document).ready(function () {
 
   function initMenu() {
     if ($(".menu").length) {
-      var menu = $(".menu");
       if ($(".burger_container").length) {
         burger.on("click", function () {
           if (menuActive) {
@@ -61,19 +59,6 @@ $(document).ready(function () {
   function closeMenu() {
     menu.removeClass("active");
     menuActive = false;
-  }
-
-  function initImage() {
-    var images = $(".product_image_thumbnail");
-    var selected = $(".product_image_large img");
-
-    images.each(function () {
-      var image = $(this);
-      image.on("click", function () {
-        var imagePath = new String(image.data("image"));
-        selected.attr("src", imagePath);
-      });
-    });
   }
 
   function initQuantity() {
@@ -111,8 +96,7 @@ $(document).ready(function () {
       .then((snapshot) => {
         const product = snapshot.val();
         if (product) {
-
-          document.getElementById("whatsappLink").addEventListener("click", function (event) {
+          document.getElementById("whatsappLink").addEventListener("click", function () {
             const currentUrl = window.location.href;
             const mensajeWhatsapp = `Hola, me interesa este producto: ${product.Name}.\n${currentUrl}`;
             const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(mensajeWhatsapp)}`;
@@ -120,31 +104,41 @@ $(document).ready(function () {
           });
 
           document.getElementById("productName").textContent = product.Name;
-          document.getElementById("productDimensions").textContent =
-            product.Dimensions || "";
-          document.getElementById("productTechnicalSheet").textContent =
-            product.TechnicalSheet || "";
-          document.getElementById("productDescription").textContent =
-            product.Description || "";
+          document.getElementById("productDimensions").textContent = product.Dimensions || "";
+          document.getElementById("productTechnicalSheet").textContent = product.TechnicalSheet || "";
+          document.getElementById("productDescription").textContent = product.Description || "";
 
           var textPrice = "";
           if (product.PricePerSquareMeter != null && product.PricePerSquareMeter != 0) {
             textPrice = `$${product.PricePerSquareMeter.toFixed(2)} x m2`;
-          }
-          else {
+          } else {
             textPrice = `$${product.Price.toFixed(2)}`;
           }
 
-          document.getElementById(
-            "productPrice"
-          ).textContent = textPrice;
+          document.getElementById("productPrice").textContent = textPrice;
 
-          document.getElementById(
-            "productImage"
-          ).src = product.ImageUrl ? product.ImageUrl : 'images/producto-sin-imagen.png';
+          // Verificar si ImageUrls está presente y no vacío
+          if (product.ImageUrls && product.ImageUrls.length > 0) {
+            // Establecer la primera imagen como la imagen principal
+            document.getElementById("productImage").src = product.ImageUrls[0];
 
-          const categoriesContainer =
-            document.getElementById("productCategories");
+            // Crear miniaturas de imágenes
+            const thumbnailContainer = document.getElementById("imageThumbnails");
+            thumbnailContainer.innerHTML = ""; // Limpiar miniaturas previas
+            product.ImageUrls.forEach((url) => {
+              const img = document.createElement("img");
+              img.src = url;
+              img.className = "product_image_thumbnail";
+              img.onclick = function () {
+                document.getElementById("productImage").src = url;
+              };
+              thumbnailContainer.appendChild(img);
+            });
+          } else {
+            document.getElementById("productImage").src = 'images/producto-sin-imagen.png';
+          }
+
+          const categoriesContainer = document.getElementById("productCategories");
           categoriesContainer.innerHTML = ""; // Limpiar contenido anterior
 
           database
@@ -155,17 +149,16 @@ $(document).ready(function () {
               const category = catSnapshot.val();
               if (category) {
                 categoriesContainer.innerHTML += `
-                <li>
-                  <a style="font-family: 'Open Sans', sans-serif;" href="/productsByCategory.html?category=${category.IdCategory}">${category.Name}</a>
-                </li>
-                <li>
-                  <a style="font-family: 'Open Sans', sans-serif;">${product.Name}</a>
-                </li>`;
+                  <li>
+                    <a style="font-family: 'Open Sans', sans-serif;" href="/productsByCategory.html?category=${category.IdCategory}">${category.Name}</a>
+                  </li>
+                  <li>
+                    <a style="font-family: 'Open Sans', sans-serif;">${product.Name}</a>
+                  </li>`;
               } else {
                 console.error("Categoría no encontrada");
               }
             });
-          //loadColors(Colors);
         } else {
           console.error("Producto no encontrado");
         }
@@ -173,20 +166,6 @@ $(document).ready(function () {
       .catch((error) => {
         console.error("Error obteniendo el producto:", error);
       });
-  }
-
-  let Colors = ["Rojo", "Verde", "Azul"];
-
-  function loadColors(colors) {
-    const colorSelect = document.getElementById("color_input");
-    colorSelect.innerHTML = "";
-
-    colors.forEach(color => {
-      const option = document.createElement("option");
-      option.value = color;
-      option.textContent = color;
-      colorSelect.appendChild(option);
-    });
   }
 
   function getUrlParameter(name) {
