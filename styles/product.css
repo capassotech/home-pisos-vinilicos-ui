@@ -34,12 +34,12 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800');
 
 @font-face {
-	font-family: 'Lucida';
+	font-family: 'Open Sans', sans-serif;
 	src: url('../fonts/lucida_bright_regular.ttf') format('truetype');
 }
 
 @font-face {
-	font-family: 'Lucida';
+	font-family: 'Open Sans', sans-serif;
 	src: url('../fonts/lucida_bright_demi.ttf') format('truetype');
 	font-weight: 700;
 }
@@ -269,7 +269,7 @@ section {
 }
 
 .section_title {
-	font-family: 'Lucida', serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 60px;
 	text-transform: uppercase;
 	color: #2f2f2f;
@@ -345,7 +345,7 @@ section {
 *********************************/
 
 .logo a {
-	font-family: 'Lucida', serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 30px;
 	color: #2f2f2f;
 }
@@ -565,7 +565,7 @@ section {
 }
 
 .home_title {
-	font-family: 'Lucida', serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 36px;
 	color: #FFFFFF;
 	line-height: 0.75;
@@ -578,13 +578,13 @@ section {
 .breadcrumbs ul li {
 	display: inline-block;
 	position: relative;
-	font-family: 'Lucida', serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;
 	color: #FFFFFF;
 }
 
 .breadcrumbs ul li a {
-	font-family: 'Lucida', serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;
 	color: #FFFFFF;
 	-webkit-transition: all 200ms ease;
@@ -724,7 +724,7 @@ section {
 .current_page ul li {
 	display: inline-block;
 	position: relative;
-	font-family: 'Lucida', serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;
 	color: #232323;
 }
@@ -741,7 +741,7 @@ section {
 }
 
 .current_page ul li a {
-	font-family: 'Lucida', serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;
 	color: #232323;
 	-webkit-transition: all 200ms ease;
@@ -1081,7 +1081,7 @@ section {
 }
 
 .reviews_title {
-	font-family: 'Lucida', serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 30px;
 	color: #232323;
 	text-transform: uppercase;
@@ -1164,7 +1164,7 @@ section {
 }
 
 .review_form_title {
-	font-family: 'Lucida', serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 30px;
 	color: #232323;
 	text-transform: uppercase;
@@ -1389,7 +1389,7 @@ section {
 }
 
 .footer_logo a {
-	font-family: 'Lucida', serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 60px;
 	color: #232323;
 }
@@ -1453,6 +1453,7 @@ section {
 
 .copyright {
 	margin-top: 56px;
+	font-family: 'Open Sans', sans-serif;
 	padding-bottom: 13px;
 	font-size: 12px;
 	color: #232323;
