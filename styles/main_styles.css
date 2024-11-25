@@ -921,6 +921,14 @@ section {
 	padding-bottom: 95px;
 }
 
+.product_content-home {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 150px;
+}
+
 .products_container {
 	margin-top: 10px;
 	text-align: center;
@@ -1022,6 +1030,11 @@ section {
 
 .product_info {
 	float: left;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
 }
 
 .product_name a {
@@ -1048,7 +1061,7 @@ section {
 
 .product_options {
 	float: right;
-	transform: translateY(11px);
+	transform: translateY(11px)
 }
 
 .product_option {
@@ -1079,7 +1092,7 @@ section {
 	-o-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 	width: 22px;
-    height: 35px;
+	height: 35px;
 }
 
 .product_buy:hover {
@@ -1552,8 +1565,7 @@ section {
 	color: #e0e3e4;
 }
 
-.product_grid
-{
+.product_grid {
 	width: calc(100% + 30px);
 	margin-left: -15px;
 	display: ruby;
