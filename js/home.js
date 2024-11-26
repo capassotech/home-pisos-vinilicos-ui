@@ -1,22 +1,31 @@
 function obtenerProductosDestacados() {
-  const productosRef = firebase.database().ref('Product');
+  const productosRef = firebase.database().ref("Product");
 
-  productosRef.orderByChild('IsFeatured').equalTo(true).limitToFirst(6).once('value', (snapshot) => {
-    const productosContainer = document.querySelector('.products_container');
-    productosContainer.innerHTML = '';
-    snapshot.forEach((childSnapshot) => {
-      const producto = childSnapshot.val();
-      const currentUrl = window.location.href;
-      const mensajeWhatsapp = `Hola, me interesa este producto: ${producto.Name}.\n${currentUrl}`;
-      const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(mensajeWhatsapp)}`;
-      const imageUrl = producto.ImageUrls && producto.ImageUrls.length > 0
-        ? producto.ImageUrls[0]
-        : 'images/producto-sin-imagen.png';
-      productosContainer.innerHTML += `
+  productosRef
+    .orderByChild("IsFeatured")
+    .equalTo(true)
+    .limitToFirst(6)
+    .once("value", (snapshot) => {
+      const productosContainer = document.querySelector(".products_container");
+      productosContainer.innerHTML = "";
+      snapshot.forEach((childSnapshot) => {
+        const producto = childSnapshot.val();
+        const currentUrl = window.location.href;
+        const mensajeWhatsapp = `Hola, me interesa este producto: ${producto.Name}.\n${currentUrl}`;
+        const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(
+          mensajeWhatsapp
+        )}`;
+        const imageUrl =
+          producto.ImageUrls && producto.ImageUrls.length > 0
+            ? producto.ImageUrls[0]
+            : "images/producto-sin-imagen.png";
+        productosContainer.innerHTML += `
           <div class="col-lg-4 product_col">
             <div class="product">
               <div class="product_image">
-                <img src="${imageUrl}" alt="${producto.Name}">
+                <a href="product.html?productId=${producto.IdProduct}">
+  <img src="${imageUrl}" alt="${producto.Name}">
+</a>
               </div>
               <div class="product_content clearfix">
                 <div class="product_info">
@@ -33,8 +42,8 @@ function obtenerProductosDestacados() {
               </div>
             </div>
           </div>`;
+      });
     });
-  });
 }
 
 obtenerProductosDestacados();
