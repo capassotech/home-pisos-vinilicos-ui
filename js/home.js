@@ -23,7 +23,9 @@ function obtenerProductosDestacados() {
           <div class="col-lg-4 product_col">
             <div class="product">
               <div class="product_image">
-                <img src="${imageUrl}" alt="${producto.Name}">
+                <a href="product.html?productId=${producto.IdProduct}">
+  <img src="${imageUrl}" alt="${producto.Name}">
+</a>
               </div>
               <div class="product_content-home">
                 <div class="product_info">
