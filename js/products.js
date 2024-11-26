@@ -14,11 +14,11 @@ function getProductos() {
       updateProductDisplay(products, currentPage);
       updatePagination();
       const urlParams = new URLSearchParams(window.location.search);
-      const searchTerm = urlParams.get('search');
+      const searchTerm = urlParams.get("search");
 
       if (searchTerm) {
-        document.getElementById("search-input").value = searchTerm; 
-        searchProducts(searchTerm); 
+        document.getElementById("search-input").value = searchTerm;
+        searchProducts(searchTerm);
       }
     })
     .catch((error) => {
@@ -29,7 +29,7 @@ function getProductos() {
 // Función para mostrar los productos de la página actual
 function updateProductDisplay(products, page) {
   const productsContainer = document.querySelector(".product_grid");
-  productsContainer.innerHTML = ""; 
+  productsContainer.innerHTML = "";
   const startIndex = (page - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedProducts = products.slice(startIndex, endIndex);
@@ -38,12 +38,18 @@ function updateProductDisplay(products, page) {
     return;
   }
   paginatedProducts.forEach((product) => {
-    const mensajeWhatsapp = `Hola, me interesa este producto: $${product.Price} ${product.Name}`;
-    const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(mensajeWhatsapp)}`;
+    const mensajeWhatsapp = `Hola, me interesa este producto: $${product.Price.toLocaleString(
+      "es-AR",
+      { minimumFractionDigits: 0, maximumFractionDigits: 0 }
+    )} ${product.Name}`;
+    const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(
+      mensajeWhatsapp
+    )}`;
 
-    const imageUrl = product.ImageUrls && product.ImageUrls.length > 0 
-      ? product.ImageUrls[0]  // Usa la primera imagen en ImageUrls
-      : 'images/producto-sin-imagen.png';
+    const imageUrl =
+      product.ImageUrls && product.ImageUrls.length > 0
+        ? product.ImageUrls[0] // Usa la primera imagen en ImageUrls
+        : "images/producto-sin-imagen.png";
 
     const productHTML = `
       <div class="product">
@@ -52,8 +58,13 @@ function updateProductDisplay(products, page) {
         </div>
         <div class="product_content clearfix mt-3">
           <div class="product_info">
-            <div class="product_name"><a href="product.html?productId=${product.IdProduct}">${product.Name}</a></div>
-            <div class="product_price">$${product.Price.toFixed(2)}</div>
+            <div class="product_name"><a href="product.html?productId=${
+              product.IdProduct
+            }">${product.Name}</a></div>
+            <div class="product_price">$${Math.round(product.Price)
+              .toString()
+              .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</div>
+      </div>
           </div>
           <div class="product_options">
             <div class="product_buy product_option">
