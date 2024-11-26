@@ -54,7 +54,9 @@ function updateProductDisplay(products, page) {
     const productHTML = `
       <div class="product">
         <div class="product_image">
-          <img src="${imageUrl}" alt="${product.Name}">
+          <a href="product.html?productId=${product.IdProduct}">
+  <img src="${imageUrl}" alt="${product.Name}">
+</a>
         </div>
         <div class="product_content clearfix mt-3">
           <div class="product_info">
