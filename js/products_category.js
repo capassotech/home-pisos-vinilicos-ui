@@ -30,12 +30,17 @@ function updateProductDisplay(products, page) {
   paginatedProducts.forEach((product) => {
     const currentUrl = window.location.href;
     const mensajeWhatsapp = `Hola, me interesa este producto: ${product.Name}.\n${currentUrl}`;
-    const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(mensajeWhatsapp)}`;
+    const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(
+      mensajeWhatsapp
+    )}`;
 
     // Usar la primera imagen de ImageUrls si está disponible, de lo contrario usar ImageUrl o la imagen por defecto
-    const imageUrl = product.ImageUrls && product.ImageUrls.length > 0 
-      ? product.ImageUrls[0] 
-      : (product.ImageUrl ? product.ImageUrl : 'images/producto-sin-imagen.png');
+    const imageUrl =
+      product.ImageUrls && product.ImageUrls.length > 0
+        ? product.ImageUrls[0]
+        : product.ImageUrl
+        ? product.ImageUrl
+        : "images/producto-sin-imagen.png";
 
     const productHTML = `
             <div class="product">
@@ -44,8 +49,12 @@ function updateProductDisplay(products, page) {
                 </div>
                 <div class="product_content clearfix mt-3">
                     <div class="product_info">
-                        <div class="product_name"><a href="product.html?productId=${product.IdProduct}">${product.Name}</a></div>
-                        <div class="product_price">$${product.Price.toFixed(2)}</div>
+                        <div class="product_name"><a href="product.html?productId=${
+                          product.IdProduct
+                        }">${product.Name}</a></div>
+                         <div class="product_price">$${Math.round(product.Price)
+                           .toString()
+                           .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</div>
                     </div>
                     <div class="product_options">
                       <div class="product_buy product_option">
@@ -70,9 +79,12 @@ function updateProductDisplayCategory(products, page) {
 
   paginatedProducts.forEach((product) => {
     // Usar la primera imagen de ImageUrls si está disponible, de lo contrario usar ImageUrl o la imagen por defecto
-    const imageUrl = product.ImageUrls && product.ImageUrls.length > 0 
-      ? product.ImageUrls[0] 
-      : (product.ImageUrl ? product.ImageUrl : 'images/producto-sin-imagen.png');
+    const imageUrl =
+      product.ImageUrls && product.ImageUrls.length > 0
+        ? product.ImageUrls[0]
+        : product.ImageUrl
+        ? product.ImageUrl
+        : "images/producto-sin-imagen.png";
 
     const productHTML = `
             <div class="product">
@@ -81,8 +93,12 @@ function updateProductDisplayCategory(products, page) {
                 </div>
                 <div class="product_content clearfix mt-3">
                     <div class="product_info">
-                        <div class="product_name"><a href="product.html">${product.Name}</a></div>
-                        <div class="product_price">$${product.Price.toFixed(2)}</div>
+                        <div class="product_name"><a href="product.html">${
+                          product.Name
+                        }</a></div>
+                         <div class="product_price">$${Math.round(product.Price)
+                           .toString()
+                           .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</div>
                     </div>
                     <div class="product_options">
                         <div class="product_buy product_option"><img src="images/shopping-bag-white.svg" alt=""></div>
