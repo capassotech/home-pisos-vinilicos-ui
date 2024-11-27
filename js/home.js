@@ -30,7 +30,7 @@ function obtenerProductosDestacados() {
               <div class="product_content-home">
                 <div class="product_info">
                   <div class="product_name"><a href="product.html?productId=${producto.IdProduct}">${producto.Name}</a></div>
-                  <div class="product_price">$${producto.Price}</div>
+                  <div class="product_price">$${Math.round(producto.Price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</div>
                 </div>
                 <div class="product_options">
                   <div class="product_buy product_option">

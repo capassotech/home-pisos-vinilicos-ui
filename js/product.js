@@ -88,7 +88,7 @@ $(document).ready(function () {
 
   function displayProductDetails(productId) {
     const database = firebase.database();
-  
+
     database
       .ref("Product")
       .child(productId)
@@ -97,13 +97,20 @@ $(document).ready(function () {
         const product = snapshot.val();
         if (product) {
           document.getElementById("productName").textContent = product.Name;
-          document.getElementById("productPrice").textContent = `$${product.Price || "Precio no disponible"}`;
-          document.getElementById("productDescription").textContent = product.Description || "";
-  
+          document.getElementById("productPrice").textContent = product.Price
+            ? `$${product.Price.toLocaleString("es-AR", {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+              })}`
+            : "Precio no disponible";
+          document.getElementById("productDescription").textContent =
+            product.Description || "";
+
           if (product.ImageUrls && product.ImageUrls.length > 0) {
             document.getElementById("productImage").src = product.ImageUrls[0];
-            const thumbnailContainer = document.getElementById("imageThumbnails");
-            thumbnailContainer.innerHTML = ""; 
+            const thumbnailContainer =
+              document.getElementById("imageThumbnails");
+            thumbnailContainer.innerHTML = "";
             product.ImageUrls.slice(0).forEach((url) => {
               const img = document.createElement("img");
               img.src = url;
@@ -114,7 +121,8 @@ $(document).ready(function () {
               thumbnailContainer.appendChild(img);
             });
           } else {
-            document.getElementById("productImage").src = "images/producto-sin-imagen.png";
+            document.getElementById("productImage").src =
+              "images/producto-sin-imagen.png";
           }
         } else {
           console.error("Producto no encontrado");

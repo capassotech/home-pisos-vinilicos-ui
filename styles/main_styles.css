@@ -926,7 +926,7 @@ section {
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	height: 150px;
+	height: 160px;
 }
 
 .products_container {
@@ -1035,6 +1035,8 @@ section {
 	justify-content: center;
 	flex-direction: column;
 	text-align: center;
+	height: 80px;
+
 }
 
 .product_name a {
@@ -1061,7 +1063,16 @@ section {
 
 .product_options {
 	float: right;
-	transform: translateY(11px)
+	transform: translateY(11px);
+	padding-left: 80%;
+
+}
+
+.aling-left {
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	flex-direction: column;
 }
 
 .product_option {
@@ -1080,6 +1091,7 @@ section {
 	-ms-transition: all 200ms ease;
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
+
 }
 
 .product_buy i {
