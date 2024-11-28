@@ -37,6 +37,7 @@
 	<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" type="text/css" href="styles/product.css" />
 	<link rel="stylesheet" type="text/css" href="styles/product_responsive.css" />
+
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
 
 	<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
@@ -51,41 +52,64 @@
 		<!-- Header -->
 
 		<header class="header">
-			<div class="header_inner d-flex flex-row align-items-center justify-content-start">
+			<div
+			  class="header_inner d-flex flex-row align-items-center justify-content-start"
+			>
+			  <div class="logo">
 				<div class="logo"><a href="index.html"><img style="width: 100px;" src="images/logo.png" /></a></div>
-				<nav class="main_nav">
-					<ul>
-						<li id="category-1"><a href="#"></a></li>
-						<li id="category-2"><a href="#"></a></li>
-						<li class="nav-item dropdown">
-							<a class=" dropdown-toggle" href="#" id="navbarDropdown" role="button"
-								data-bs-toggle="dropdown" aria-expanded="false">Más Productos
-							</a>
-							<ul class="dropdown-menu" id="more-products" aria-labelledby="navbarDropdown">
-								<!-- Aquí se agregarán dinámicamente las categorías no destacadas -->
-							</ul>
-						</li>
-						<li><a href="/contact.html">Contacto</a></li>
+			  </div>
+			  <nav class="main_nav">
+				<ul class="d-flex flex-row align-items-center justify-content-start">
+				  <li id="category-1"><a href="#"></a></li>
+				  <li id="category-2"><a href="#"></a></li>
+				  <li class="nav-item dropdown">
+					<a
+					  class="dropdown-toggle"
+					  href="#"
+					  id="navbarDropdown"
+					  role="button"
+					  data-bs-toggle="dropdown"
+					  aria-expanded="false"
+					  >Más Productos
+					</a>
+	
+					<ul
+					  class="dropdown-menu"
+					  id="more-products"
+					  aria-labelledby="navbarDropdown"
+					>
+					  <!-- Aquí se agregarán dinámicamente las categorías no destacadas -->
 					</ul>
-				</nav>
-				<div class="header_content ml-5">
-					<div class="search header_search">
-						<form id="search-form" action="#">
-							<input type="search" class="search_input" id="search-input" required="required" placeholder="Buscar productos...">
-							<button type="submit" id="search_button" class="search_button">
-								<img src="images/magnifying-glass.svg" alt="">
-							</button>
-						</form>
-					</div>
+				  </li>
+				  <li><a href="/contact.html">Contacto</a></li>
+				</ul>
+			  </nav>
+			  <div class="header_content ml-5">
+				<div class="search header_search">
+				  <form id="search-form" action="#">
+					<input
+					  type="search"
+					  class="search_input"
+					  id="search-input"
+					  required="required"
+					  placeholder="Buscar productos..."
+					/>
+					<button type="submit" id="search_button" class="search_button">
+					  <img src="images/magnifying-glass.svg" alt="" />
+					</button>
+				  </form>
 				</div>
-
-				<div class="burger_container d-flex flex-column align-items-center justify-content-around menu_mm">
-					<div></div>
-					<div></div>
-					<div></div>
-				</div>
+			  </div>
+	
+			  <div
+				class="burger_container d-flex flex-column align-items-center justify-content-around menu_mm"
+			  >
+				<div></div>
+				<div></div>
+				<div></div>
+			  </div>
 			</div>
-		</header>
+		  </header>
 
 		<!-- Menu -->
 
