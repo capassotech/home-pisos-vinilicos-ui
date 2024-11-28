@@ -364,7 +364,8 @@ section {
 
 
 .main_nav ul li {
-	display: inline-block;
+	display: flex;
+	flex-direction: column;
 	margin-right: 50px;
 	text-align: center;
 }
