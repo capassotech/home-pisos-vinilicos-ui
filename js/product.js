@@ -96,12 +96,35 @@ $(document).ready(function () {
       .then((snapshot) => {
         const product = snapshot.val();
         if (product) {
+          const categoriesContainer = document.getElementById("productCategories");
+          categoriesContainer.innerHTML = "";
+
+          database
+            .ref("Category")
+            .child(product.IdCategory)
+            .once("value")
+            .then((catSnapshot) => {
+              const category = catSnapshot.val();
+              if (category) {
+                categoriesContainer.innerHTML += `
+                    <li>
+                      <a href="/productsByCategory.html?category=${category.IdCategory}">${category.Name}</a>
+                    </li>
+                    <li>
+                      <a>${product.Name}</a>
+                    </li>`;
+              } else {
+                console.error("Categoría no encontrada");
+              }
+            });
+
+
           document.getElementById("productName").textContent = product.Name;
           document.getElementById("productPrice").textContent = product.Price
             ? `$${product.Price.toLocaleString("es-AR", {
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0,
-              })}`
+              minimumFractionDigits: 0,
+              maximumFractionDigits: 0,
+            })}`
             : "Precio no disponible";
           document.getElementById("productDescription").textContent =
             product.Description || "";
@@ -132,6 +155,7 @@ $(document).ready(function () {
         console.error("Error obteniendo el producto:", error);
       });
   }
+
   function getUrlParameter(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
