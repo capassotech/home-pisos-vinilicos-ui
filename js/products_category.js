@@ -14,6 +14,7 @@ function getProductosByCategory() {
       updatePagination();
     })
     .catch((error) => {
+      console.error("hola")
       console.error("Error obteniendo los productos", error);
     });
 }
