@@ -25,12 +25,19 @@
 1. 1800px
 ************/
 
-@media only screen and (max-width: 1800px) {
+@media only screen and (max-width: 1500px) {
 	.search {
-		width: 200px;
+		width: 250px;
+		margin-left: 2%;
 	}
 }
-
+@media only screen and (max-width: 1390px) {
+	.search {
+		width: 240px;
+		padding-right: 2%;
+		padding-left: 0%;
+	}
+}
 /************
 1. 1600px
 ************/
@@ -70,9 +77,13 @@
 		margin-right: 34px;
 	}
 
-	    .header_search {
+	.header_search {
 		display: none;
-	}    
+	}
+
+	.social-floating-buttons {
+		display: none;
+	}
 }
 
 /************
@@ -142,8 +153,8 @@
 		margin-right: 0px;
 		margin-bottom: 30px;
 	}
-	
-	#extra_2_content{
+
+	#extra_2_content {
 		padding-left: 20px;
 		padding-right: 20px;
 		margin-left: 30px;
@@ -280,11 +291,12 @@
 		padding-right: 20px;
 	}
 
-	#extra_2_content{
+	#extra_2_content {
 		padding-left: 20px;
 		padding-right: 20px;
 		margin-left: 30px;
 	}
+
 	.gallery {
 		padding-left: 15px;
 		padding-right: 15px;

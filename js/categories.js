@@ -157,8 +157,8 @@ $(document).ready(function () {
 								<div class="product">
 									<div class="product_image">
 										<a href="product.html?productId=${product.IdProduct}">
-  <img src="${imageUrl}" alt="${product.Name}">
-</a>
+                      <img src="${imageUrl}" alt="${product.Name}">
+                    </a>
 									</div>
 									<div class="product_content clearfix mt-3">
 										<div class="product_info">

@@ -35,7 +35,7 @@
 	<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" type="text/css" href="styles/contact.css">
 	<link rel="stylesheet" type="text/css" href="styles/contact_responsive.css">
-
+	<link rel="stylesheet" type="text/css" href="styles/responsive.css" />
 	<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
 	<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
 </head>
@@ -51,7 +51,7 @@
 			<div class="header_inner d-flex flex-row align-items-center justify-content-start">
 				<div class="logo"><a href="index.html"><img style="width: 100px;" src="images/logo.png" /></a></div>
 				<nav class="main_nav">
-					<ul>
+					<ul class="d-flex flex-row align-items-center justify-content-start">
 						<li id="category-1"><a href="#"></a></li>
 						<li id="category-2"><a href="#"></a></li>
 						<li class="nav-item dropdown">
@@ -65,16 +65,17 @@
 						<li><a href="/contact.html">Contacto</a></li>
 					</ul>
 				</nav>
-				<div class="header_content ml-5">
+				<!-- <div class="header_content ml-5">
 					<div class="search header_search">
 						<form id="search-form" action="#">
-							<input type="search" class="search_input" id="search-input" required="required" placeholder="Buscar productos...">
+							<input type="search" class="search_input" id="search-input" required="required"
+								placeholder="Buscar productos...">
 							<button type="submit" id="search_button" class="search_button">
 								<img src="images/magnifying-glass.svg" alt="">
 							</button>
 						</form>
 					</div>
-				</div>
+				</div> -->
 
 				<div class="burger_container d-flex flex-column align-items-center justify-content-around menu_mm">
 					<div></div>
@@ -96,7 +97,8 @@
 			<div class="logo"><a href="index.html"><img style="width: 100px;" src="images/logo.png" /></a></div>
 			<div class="search">
 				<form id="search-form-menu" action="#">
-					<input type="search" class="search_input menu_mm" id="search-input-menu" required="required" placeholder="Buscar productos...">
+					<input type="search" class="search_input menu_mm" id="search-input-menu" required="required"
+						placeholder="Buscar productos...">
 					<button type="submit" id="search_button_menu" class="search_button menu_mm">
 						<img class="menu_mm" src="images/magnifying-glass.svg" alt="">
 					</button>
@@ -265,7 +267,8 @@
 							<ul>
 								<li class="menu_mm"><a href="/">Inicio</a></li>
 								<li class="menu_mm"><a href="/products.html">Productos</a></li>
-								<li class="menu_mm"><a href="/contact.html#preguntas-frecuentes">Preguntas Frecuentes</a>
+								<li class="menu_mm"><a href="/contact.html#preguntas-frecuentes">Preguntas
+										Frecuentes</a>
 								</li>
 								<li class="menu_mm"><a href="/contact.html">Contacto</a></li>
 							</ul>
