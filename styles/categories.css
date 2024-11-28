@@ -371,7 +371,8 @@ section {
 }
 
 .main_nav ul li {
-	display: inline-block;
+	display: flex;
+	flex-direction: column;
 	margin-right: 50px;
 }
 
@@ -395,6 +396,7 @@ section {
 .main_nav ul li a:hover {
 	color: #937c6f;
 }
+
 
 /*********************************
 3.3 Header - Search

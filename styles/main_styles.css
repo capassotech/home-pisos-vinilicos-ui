@@ -370,7 +370,8 @@ section {
 }
 
 .main_nav ul li {
-	display: inline-block;
+	display: flex;
+	flex-direction: column;
 	margin-right: 50px;
 }
 
@@ -443,6 +444,9 @@ section {
 	max-width: 100%;
 }
 
+a .dropdown-item {
+	width: 35vh;
+}
 /*********************************
 3.4 Header - Shopping
 *********************************/
