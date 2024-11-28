@@ -25,30 +25,13 @@
 1. 1800px
 ************/
 
-@media only screen and (max-width: 1800px)
-{
-	.search
-	{
-		width: 200px;
-	}
-}
+
 
 /************
 1. 1600px
 ************/
 
-@media only screen and (max-width: 1600px)
-{
-	.main_nav
-	{
-		padding-left: 100px;
-	}
-	.shopping
-	{
-		padding-right: 100px;
-		margin-left: 100px;
-	}
-}
+
 
 /************
 2. 1440px
@@ -67,21 +50,7 @@
 3. 1380px
 ************/
 
-@media only screen and (max-width: 1380px)
-{
-	.main_nav
-	{
-		padding-left: 60px;
-	}
-	.main_nav ul li
-	{
-		margin-right: 34px;
-	}
-	.header_search
-	{
-		display: none;
-	}
-}
+
 
 /************
 3. 1280px
@@ -125,14 +94,7 @@
 
 @media only screen and (max-width: 991px)
 {
-	.main_nav
-	{
-		display: none;
-	}
-	.shopping
-	{
-		padding-right: 91px;
-	}
+
 	.section_title
 	{
 		font-size: 48px;
