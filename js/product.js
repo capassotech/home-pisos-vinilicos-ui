@@ -96,29 +96,31 @@ $(document).ready(function () {
       .then((snapshot) => {
         const product = snapshot.val();
         if (product) {
-          const categoriesContainer = document.getElementById("productCategories");
-          categoriesContainer.innerHTML = "";
-
-          database
-            .ref("Category")
-            .child(product.IdCategory)
-            .once("value")
-            .then((catSnapshot) => {
-              const category = catSnapshot.val();
-              if (category) {
-                categoriesContainer.innerHTML += `
-                    <li>
-                      <a href="/productsByCategory.html?category=${category.IdCategory}">${category.Name}</a>
-                    </li>
-                    <li>
-                      <a>${product.Name}</a>
-                    </li>`;
-              } else {
-                console.error("Categoría no encontrada");
-              }
-            });
-
-
+          //Ruta de categorias
+          if(product.IdCategory != undefined){
+            const categoriesContainer = document.getElementById("productCategories");
+            categoriesContainer.innerHTML = "";
+  
+            database
+              .ref("Category")
+              .child(product.IdCategory)
+              .once("value")
+              .then((catSnapshot) => {
+                const category = catSnapshot.val();
+                if (category) {
+                  categoriesContainer.innerHTML += `
+                      <li>
+                        <a href="/productsByCategory.html?category=${category.IdCategory}">${category.Name}</a>
+                      </li>
+                      <li>
+                        <a>${product.Name}</a>
+                      </li>`;
+                } else {
+                  console.error("Categoría no encontrada");
+                }
+              });
+          }
+          
           document.getElementById("productName").textContent = product.Name;
           document.getElementById("productPrice").textContent = product.Price
             ? `$${product.Price.toLocaleString("es-AR", {
