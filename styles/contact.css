@@ -384,7 +384,9 @@ section {
 .main_nav ul li a:hover {
 	color: #937c6f;
 }
-
+.dropdown-menu {
+	width: 38vh;
+}
 /*********************************
 3.3 Header - Search
 *********************************/
