@@ -375,12 +375,12 @@ section {
 	display: flex;
 	flex-direction: column;
 	margin-right: 50px;
-	text-align: center;
+	text-align: left;
 }
 
 .main_nav ul li:last-child {
 	margin-right: 0;
-	
+
 }
 
 .main_nav ul li a {
@@ -394,11 +394,19 @@ section {
 	-ms-transition: all 200ms ease;
 	-o-transition: all 200ms ease;
 	transition: all 200ms ease;
-	
+
 }
 
 .main_nav ul li a:hover {
 	color: #937c6f;
+}
+
+.dropdown-menu {
+	width: 38vh;
+}
+
+.dropdown-item {
+	display: block;
 }
 
 /*********************************
@@ -449,9 +457,7 @@ section {
 	max-width: 100%;
 }
 
-a .dropdown-item {
-	width: 35vh;
-}
+
 /*********************************
 3.4 Header - Shopping
 *********************************/
@@ -1531,6 +1537,7 @@ a .dropdown-item {
 
 .footer_nav {
 	margin-top: 14px;
+
 	ul {
 		padding-left: 0 !important;
 	}
