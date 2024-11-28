@@ -1527,6 +1527,9 @@ section {
 
 .footer_nav {
 	margin-top: 14px;
+	ul {
+		padding-left: 0 !important;
+	}
 }
 
 .footer_nav ul li {
@@ -1557,6 +1560,10 @@ section {
 
 .footer_social {
 	margin-top: 51px;
+
+	ul {
+		padding-left: 0 !important;
+	}
 }
 
 .footer_social ul li {

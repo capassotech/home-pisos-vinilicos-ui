@@ -80,6 +80,10 @@
 	.header_search {
 		display: none;
 	}
+
+	.social-floating-buttons {
+		display: none;
+	}
 }
 
 /************
