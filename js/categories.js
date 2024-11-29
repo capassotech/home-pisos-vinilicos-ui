@@ -184,7 +184,9 @@ $(document).ready(function () {
 											<div class="product_name"><a href="product.html?productId=${
                         product.IdProduct
                       }">${product.Name}</a></div>
-											<div class="product_price">$${product.Price.toFixed(2)}</div>
+											 <div class="product_price">$${Math.round(product.Price)
+                           .toString()
+                           .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</div>
 										</div>
 										<div class="product_options">
 											<div class="product_buy product_option">
