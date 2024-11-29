@@ -112,30 +112,44 @@
 
 		<div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
 			<div class="menu_close_container">
-				<div class="menu_close">
-					<div></div>
-					<div></div>
-				</div>
+			  <div class="menu_close">
+				<div></div>
+				<div></div>
+			  </div>
 			</div>
-			<div class="logo"><a href="index.html"><img style="width: 100px;" src="images/logo.png" /></a></div>
+			<div class="logo">
+			  <a href="index.html"><img style="width: 100px" src="images/logo.png" /></a>
+			</div>
 			<div class="search">
-				<form id="search-form-menu" action="#">
-					<input type="search" class="search_input menu_mm" id="search-input-menu" required="required"
-						placeholder="Buscar productos...">
-					<button type="submit" id="search_button_menu" class="search_button menu_mm">
-						<img class="menu_mm" src="images/magnifying-glass.svg" alt="">
-					</button>
-				</form>
+			  <form id="search-form-menu" action="#">
+				<input type="search" class="search_input menu_mm" id="search-input-menu" required="required"
+				  placeholder="Buscar productos..." />
+				<button type="submit" id="search_button_menu" class="search_button menu_mm">
+				  <img class="menu_mm" src="images/magnifying-glass.svg" alt="" />
+				</button>
+			  </form>
 			</div>
 			<nav class="menu_nav">
-				<ul class="menu_mm">
-					<li class="menu_mm"><a href="/">Inicio</a></li>
-					<li class="menu_mm"><a href="/products.html">Productos</a></li>
-					<li class="menu_mm"><a href="/contact.html#preguntas-frecuentes">Preguntas Frecuentes</a></li>
-					<li class="menu_mm"><a href="/contact.html">Contacto</a></li>
-				</ul>
+			  <ul class="menu_mm">
+				<li class="menu_mm"><a href="/">Inicio</a></li>
+				<li id="category-1-menu" class="menu_mm"><a href="#"></a></li>
+				<li id="category-2-menu" class="menu_mm"><a href="#"></a></li>
+				<li class="menu_mm nav-item dropdown">
+				  <a class="dropdown-toggle" href="#" id="navbarDropdownMenu" role="button" data-bs-toggle="dropdown"
+					aria-expanded="false" data-prevent-close="true">Más Productos
+				  </a>
+				  <ul class="dropdown-menu menu_mm" id="more-products-menu" aria-labelledby="navbarDropdownMenu">
+					<!-- Aquí se agregarán dinámicamente las categorías no destacadas -->
+				  </ul>
+				</li>
+				<li class="menu_mm"><a href="/products.html">Productos</a></li>
+				<li class="menu_mm">
+				  <a href="/contact.hml#preguntas-frecuentes">Preguntas Frecuentes</a>
+				</li>
+				<li class="menu_mm"><a href="/contact.html">Contacto</a></li>
+			  </ul>
 			</nav>
-		</div>
+		  </div>
 
 		<!-- Product -->
 

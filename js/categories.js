@@ -37,18 +37,20 @@ $(document).ready(function () {
     const mainNav = document.querySelector(".main_nav");
     const navbarDropdown = document.querySelector(".nav-item.dropdown");
     const moreProductsMenu = document.getElementById("more-products");
+    const moreProductsMenuResponsive =
+      document.getElementById("more-products-menu");
     const loader = document.getElementById("loader");
-  
+
     loader.style.display = "flex";
-  
+
     header.style.visibility = "hidden";
-  
+
     database
       .ref("Category")
       .once("value")
       .then((snapshot) => {
         const categories = snapshot.val();
-  
+
         if (categories) {
           const categoryList = Object.values(categories);
           const featuredCategories = categoryList.filter(
@@ -57,7 +59,7 @@ $(document).ready(function () {
           const nonFeaturedCategories = categoryList.filter(
             (category) => !category.IsFeatured
           );
-  
+
           if (featuredCategories.length > 0) {
             if (featuredCategories[0]) {
               document.getElementById(
@@ -65,6 +67,12 @@ $(document).ready(function () {
               ).firstElementChild.textContent = featuredCategories[0].Name;
               document.getElementById(
                 "category-1"
+              ).firstElementChild.href = `/productsByCategory.html?category=${featuredCategories[0].IdCategory}`;
+              document.getElementById(
+                "category-1-menu"
+              ).firstElementChild.textContent = featuredCategories[0].Name;
+              document.getElementById(
+                "category-1-menu"
               ).firstElementChild.href = `/productsByCategory.html?category=${featuredCategories[0].IdCategory}`;
             }
             if (featuredCategories[1]) {
@@ -74,13 +82,20 @@ $(document).ready(function () {
               document.getElementById(
                 "category-2"
               ).firstElementChild.href = `/productsByCategory.html?category=${featuredCategories[1].IdCategory}`;
+              document.getElementById(
+                "category-2-menu"
+              ).firstElementChild.textContent = featuredCategories[1].Name;
+              document.getElementById(
+                "category-2-menu"
+              ).firstElementChild.href = `/productsByCategory.html?category=${featuredCategories[1].IdCategory}`;
             }
           }
-  
+
           if (nonFeaturedCategories.length > 0) {
             navbarDropdown.style.display = "block";
             moreProductsMenu.innerHTML = "";
-  
+            moreProductsMenuResponsive.innerHTML = "";
+
             nonFeaturedCategories.forEach((category) => {
               const li = document.createElement("li");
               const a = document.createElement("a");
@@ -89,6 +104,10 @@ $(document).ready(function () {
               a.classList.add("dropdown-item");
               li.appendChild(a);
               moreProductsMenu.appendChild(li);
+
+              const liResponsive = li.cloneNode(true);
+              liResponsive.classList.add("menu_mm");
+              moreProductsMenuResponsive.appendChild(liResponsive);
             });
           } else {
             navbarDropdown.style.display = "none";
@@ -105,7 +124,7 @@ $(document).ready(function () {
         loader.style.display = "none";
       });
   }
-  
+
   document.addEventListener("DOMContentLoaded", loadFeaturedCategories);
 
   function loadProductsByCategory() {
@@ -358,3 +377,49 @@ $(document).ready(function () {
     }
   }
 });
+
+
+//menu responsive
+
+let menuActive = false;
+const burger = $('.burger_container');
+const menu = $('.menu');
+
+function initMenu() {
+  if ($('.menu').length) {
+    var menu = $('.menu');
+    if ($('.burger_container').length) {
+      burger.on('click', function () {
+        if (menuActive) {
+          closeMenu();
+        } else {
+          openMenu();
+
+          $(document).one('click', function cls(e) {
+            if ($(e.target).hasClass('menu_mm')) {
+              $(document).one('click', cls);
+            } else if (!$(e.target).closest('[data-prevent-close="true"]').length) {
+              closeMenu();
+            }
+          });
+        }
+      });
+    }
+  }
+}
+
+function openMenu() {
+  menu.addClass('active');
+  menuActive = true;
+}
+
+function closeMenu() {
+  menu.removeClass('active');
+  menuActive = false;
+}
+
+$(document).on('click', '[data-prevent-close="true"]', function(e) {
+  e.stopPropagation();
+});
+
+initMenu();
