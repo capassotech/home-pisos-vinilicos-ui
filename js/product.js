@@ -96,11 +96,26 @@ $(document).ready(function () {
       .then((snapshot) => {
         const product = snapshot.val();
         if (product) {
+          const productButtonsContainer = document.querySelector(".product_buttons");
+          const currentUrl = window.location.href;
+          const mensajeWhatsapp = `Hola, me interesa este producto: ${product.Name}.\n${currentUrl}`;
+          const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(
+            mensajeWhatsapp
+          )}`;
+
+          const productButtonstHTML = `
+          <div class="button cart_button" style="width: 100%;">
+					  <a id="whatsappLink" href="${urlWhatsapp}" target="_blank"><i class="bi bi-whatsapp" style="color: white"></i>
+					  Consultar</a>
+					</div>`;
+
+          productButtonsContainer.innerHTML += productButtonstHTML;
+
           //Ruta de categorias
-          if(product.IdCategory != undefined){
+          if (product.IdCategory != undefined) {
             const categoriesContainer = document.getElementById("productCategories");
             categoriesContainer.innerHTML = "";
-  
+
             database
               .ref("Category")
               .child(product.IdCategory)
@@ -120,7 +135,7 @@ $(document).ready(function () {
                 }
               });
           }
-          
+
           document.getElementById("productName").textContent = product.Name;
           document.getElementById("productPrice").textContent = product.Price
             ? `$${product.Price.toLocaleString("es-AR", {
