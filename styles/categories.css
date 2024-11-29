@@ -399,7 +399,12 @@ section {
 }
 
 .dropdown-menu {
-	width: 38vh;
+	width: auto;
+	
+	li {
+		margin-right: 0 !important;
+		text-align: left !important;
+	}
 }
 /*********************************
 3.3 Header - Search
