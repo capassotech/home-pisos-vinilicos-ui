@@ -372,7 +372,8 @@ section {
 
 
 .main_nav ul li {
-	display: inline-block;
+	display: flex;
+	flex-direction: column;
 	margin-right: 50px;
 }
 
@@ -397,6 +398,14 @@ section {
 	color: #937c6f;
 }
 
+.dropdown-menu {
+	width: auto;
+	
+	li {
+		margin-right: 0 !important;
+		text-align: left !important;
+	}
+}
 /*********************************
 3.3 Header - Search
 *********************************/
