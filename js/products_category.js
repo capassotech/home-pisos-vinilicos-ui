@@ -53,11 +53,12 @@ function updateProductDisplay(products, page) {
                         <div class="product_name"><a href="product.html?productId=${
                           product.IdProduct
                         }">${product.Name}</a></div>
-                         <div class="product_price">$${Math.round(product.Price)
-                           .toString()
-                           .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</div>
+
                     </div>
                     <div class="product_options">
+                        <div class="product_price">$${Math.round(product.Price)
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</div>
                       <div class="product_buy product_option">
                         <a href="${urlWhatsapp}" target="_blank" style="color: white; font-size: x-large;">
                           <i class="bi bi-whatsapp"></i>
@@ -99,13 +100,13 @@ function updateProductDisplayCategory(products, page) {
                         <div class="product_name"><a href="product.html">${
                           product.Name
                         }</a></div>
-                         <div class="product_price">$${Math.round(product.Price)
-                           .toString()
-                           .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</div>
+                         
                     </div>
                     <div class="product_options">
+                    <div class="product_price">$${Math.round(product.Price)
+                           .toString()
+                           .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</div>
                         <div class="product_buy product_option"><img src="images/shopping-bag-white.svg" alt=""></div>
-                        <div class="product_fav product_option">+</div>
                     </div>
                 </div>
             </div>`;

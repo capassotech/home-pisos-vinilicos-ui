@@ -184,15 +184,16 @@ $(document).ready(function () {
 											<div class="product_name"><a href="product.html?productId=${
                         product.IdProduct
                       }">${product.Name}</a></div>
-											 <div class="product_price">$${Math.round(product.Price)
-                           .toString()
-                           .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</div>
-										</div>
+										
 										<div class="product_options">
-											<div class="product_buy product_option">
-												<a href="${urlWhatsapp}" target="_blank" style="color: white; font-size: x-large;">
-												<i class="bi bi-whatsapp"></i>
-												</a>
+                    	 <div class="product_price">$${Math.round(product.Price)
+                         .toString()
+                         .replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</div>
+                         <div class="product_buy product_option">
+                         <a href="${urlWhatsapp}" target="_blank" style="color: white; font-size: x-large;">
+                         <i class="bi bi-whatsapp"></i>
+                         </a>
+                         </div>
 											</div>
 										</div>
 									</div>
@@ -380,27 +381,28 @@ $(document).ready(function () {
   }
 });
 
-
 //menu responsive
 
 let menuActive = false;
-const burger = $('.burger_container');
-const menu = $('.menu');
+const burger = $(".burger_container");
+const menu = $(".menu");
 
 function initMenu() {
-  if ($('.menu').length) {
-    var menu = $('.menu');
-    if ($('.burger_container').length) {
-      burger.on('click', function () {
+  if ($(".menu").length) {
+    var menu = $(".menu");
+    if ($(".burger_container").length) {
+      burger.on("click", function () {
         if (menuActive) {
           closeMenu();
         } else {
           openMenu();
 
-          $(document).one('click', function cls(e) {
-            if ($(e.target).hasClass('menu_mm')) {
-              $(document).one('click', cls);
-            } else if (!$(e.target).closest('[data-prevent-close="true"]').length) {
+          $(document).one("click", function cls(e) {
+            if ($(e.target).hasClass("menu_mm")) {
+              $(document).one("click", cls);
+            } else if (
+              !$(e.target).closest('[data-prevent-close="true"]').length
+            ) {
               closeMenu();
             }
           });
@@ -411,16 +413,16 @@ function initMenu() {
 }
 
 function openMenu() {
-  menu.addClass('active');
+  menu.addClass("active");
   menuActive = true;
 }
 
 function closeMenu() {
-  menu.removeClass('active');
+  menu.removeClass("active");
   menuActive = false;
 }
 
-$(document).on('click', '[data-prevent-close="true"]', function(e) {
+$(document).on("click", '[data-prevent-close="true"]', function (e) {
   e.stopPropagation();
 });
 
