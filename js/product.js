@@ -96,7 +96,8 @@ $(document).ready(function () {
       .then((snapshot) => {
         const product = snapshot.val();
         if (product) {
-          const productButtonsContainer = document.querySelector(".product_buttons");
+          const productButtonsContainer =
+            document.querySelector(".product_buttons");
           const currentUrl = window.location.href;
           const mensajeWhatsapp = `Hola, me interesa este producto: ${product.Name}.\n${currentUrl}`;
           const urlWhatsapp = `https://wa.me/5493435062138/?text=${encodeURIComponent(
@@ -104,16 +105,17 @@ $(document).ready(function () {
           )}`;
 
           const productButtonstHTML = `
-          <div class="button cart_button" style="width: 100%;">
-					  <a id="whatsappLink" href="${urlWhatsapp}" target="_blank"><i class="bi bi-whatsapp" style="color: white"></i>
-					  Consultar</a>
-					</div>`;
+                <div class="button cart_button" style="width: 100%;">
+                    <a id="whatsappLink" href="${urlWhatsapp}" target="_blank"><i class="bi bi-whatsapp" style="color: white"></i>
+                    Consultar</a>
+                </div>`;
 
           productButtonsContainer.innerHTML += productButtonstHTML;
 
           //Ruta de categorias
           if (product.IdCategory != undefined) {
-            const categoriesContainer = document.getElementById("productCategories");
+            const categoriesContainer =
+              document.getElementById("productCategories");
             categoriesContainer.innerHTML = "";
 
             database
@@ -124,12 +126,12 @@ $(document).ready(function () {
                 const category = catSnapshot.val();
                 if (category) {
                   categoriesContainer.innerHTML += `
-                      <li>
-                        <a href="/productsByCategory.html?category=${category.IdCategory}">${category.Name}</a>
-                      </li>
-                      <li>
-                        <a>${product.Name}</a>
-                      </li>`;
+                                    <li>
+                                    <a href="/productsByCategory.html?category=${category.IdCategory}">${category.Name}</a>
+                                    </li>
+                                    <li>
+                                    <a>${product.Name}</a>
+                                    </li>`;
                 } else {
                   console.error("Categoría no encontrada");
                 }
@@ -139,30 +141,87 @@ $(document).ready(function () {
           document.getElementById("productName").textContent = product.Name;
           document.getElementById("productPrice").textContent = product.Price
             ? `$${product.Price.toLocaleString("es-AR", {
-              minimumFractionDigits: 0,
-              maximumFractionDigits: 0,
-            })}`
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+              })}`
             : "Precio no disponible";
           document.getElementById("productDescription").textContent =
             product.Description || "";
 
+          const mainImage = document.getElementById("productImage");
           if (product.ImageUrls && product.ImageUrls.length > 0) {
-            document.getElementById("productImage").src = product.ImageUrls[0];
+            mainImage.src = product.ImageUrls[0];
+
             const thumbnailContainer =
               document.getElementById("imageThumbnails");
+            let currentImageIndex = 0;
+
+            const productImageLarge = document.querySelector(
+              ".product_image_large"
+            );
+            const zoomButton = document.createElement("button");
+            zoomButton.className = "zoom-button";
+            zoomButton.innerHTML = '<i class="bi bi-arrows-angle-expand"></i>';
+            productImageLarge.appendChild(zoomButton);
+
+            const modal = document.createElement("div");
+            modal.className = "modal";
+            modal.innerHTML = `
+                        <span class="modal-close">&times;</span>
+                        <span class="modal-nav modal-prev"><i class="bi bi-chevron-left"></i></span>
+                        <span class="modal-nav modal-next"><i class="bi bi-chevron-right"></i></span>
+                        <img src="${product.ImageUrls[0]}" alt="${product.Name}">
+                    `;
+            document.body.appendChild(modal);
+
+            zoomButton.addEventListener("click", () => {
+              modal.style.display = "flex";
+              updateModalImage(currentImageIndex);
+            });
+
+            modal
+              .querySelector(".modal-close")
+              .addEventListener("click", () => {
+                modal.style.display = "none";
+              });
+
+            modal.querySelector(".modal-prev").addEventListener("click", () => {
+              currentImageIndex =
+                (currentImageIndex - 1 + product.ImageUrls.length) %
+                product.ImageUrls.length;
+              updateModalImage(currentImageIndex);
+            });
+
+            modal.querySelector(".modal-next").addEventListener("click", () => {
+              currentImageIndex =
+                (currentImageIndex + 1) % product.ImageUrls.length;
+              updateModalImage(currentImageIndex);
+            });
+
+            function updateModalImage(index) {
+              modal.querySelector("img").src = product.ImageUrls[index];
+              mainImage.src = product.ImageUrls[index];
+            }
+
+            document.addEventListener("keydown", (e) => {
+              if (e.key === "Escape") {
+                modal.style.display = "none";
+              }
+            });
+
             thumbnailContainer.innerHTML = "";
-            product.ImageUrls.slice(0).forEach((url) => {
+            product.ImageUrls.forEach((url, index) => {
               const img = document.createElement("img");
               img.src = url;
               img.className = "product_image_thumbnail";
               img.onclick = function () {
-                document.getElementById("productImage").src = url;
+                mainImage.src = url;
+                currentImageIndex = index;
               };
               thumbnailContainer.appendChild(img);
             });
           } else {
-            document.getElementById("productImage").src =
-              "images/producto-sin-imagen.png";
+            mainImage.src = "images/producto-sin-imagen.png";
           }
         } else {
           console.error("Producto no encontrado");
