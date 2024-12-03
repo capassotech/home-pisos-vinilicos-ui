@@ -68,12 +68,19 @@ $(document).ready(function () {
               document.getElementById(
                 "category-1"
               ).firstElementChild.href = `/productsByCategory.html?category=${featuredCategories[0].IdCategory}`;
-              document.getElementById(
-                "category-1-menu"
-              ).firstElementChild.textContent = featuredCategories[0].Name;
-              document.getElementById(
-                "category-1-menu"
-              ).firstElementChild.href = `/productsByCategory.html?category=${featuredCategories[0].IdCategory}`;
+              
+
+              
+              console.log()
+              if(document.getElementById("category-1-menu") != null){
+                document.getElementById(
+                  "category-1-menu"
+                ).firstElementChild.textContent = featuredCategories[0].Name;
+                document.getElementById(
+                  "category-1-menu"
+                ).firstElementChild.href = `/productsByCategory.html?category=${featuredCategories[0].IdCategory}`;
+  
+              }
             }
             if (featuredCategories[1]) {
               document.getElementById(
@@ -82,12 +89,15 @@ $(document).ready(function () {
               document.getElementById(
                 "category-2"
               ).firstElementChild.href = `/productsByCategory.html?category=${featuredCategories[1].IdCategory}`;
-              document.getElementById(
-                "category-2-menu"
-              ).firstElementChild.textContent = featuredCategories[1].Name;
-              document.getElementById(
-                "category-2-menu"
-              ).firstElementChild.href = `/productsByCategory.html?category=${featuredCategories[1].IdCategory}`;
+
+              if(document.getElementById("category-2-menu") != null){
+                document.getElementById(
+                  "category-2-menu"
+                ).firstElementChild.textContent = featuredCategories[1].Name;
+                document.getElementById(
+                  "category-2-menu"
+                ).firstElementChild.href = `/productsByCategory.html?category=${featuredCategories[1].IdCategory}`;
+              }
             }
           }
 
