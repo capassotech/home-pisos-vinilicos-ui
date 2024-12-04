@@ -118,55 +118,58 @@
 
 		<div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
 			<div class="menu_close_container">
-			  <div class="menu_close">
-				<div></div>
-				<div></div>
-			  </div>
+				<div class="menu_close">
+					<div></div>
+					<div></div>
+				</div>
 			</div>
 			<div class="logo">
-			  <a href="index.html"><img style="width: 100px" src="images/logo.png" /></a>
+				<a href="index.html"><img style="width: 100px" src="images/logo.png" /></a>
 			</div>
 			<div class="search">
-			  <form id="search-form-menu" action="#">
-				<input type="search" class="search_input menu_mm" id="search-input-menu" required="required"
-				  placeholder="Buscar productos..." />
-				<button type="submit" id="search_button_menu" class="search_button menu_mm">
-				  <img class="menu_mm" src="images/magnifying-glass.svg" alt="" />
-				</button>
-			  </form>
+				<form id="search-form-menu" action="#">
+					<input type="search" class="search_input menu_mm" id="search-input-menu" required="required"
+						placeholder="Buscar productos..." />
+					<button type="submit" id="search_button_menu" class="search_button menu_mm">
+						<img class="menu_mm" src="images/magnifying-glass.svg" alt="" />
+					</button>
+				</form>
 			</div>
 			<nav class="menu_nav" style="float: left; text-align: left; width: 100%;">
 				<ul class="menu_mm">
-				  <li class="menu_mm"><a href="/">Inicio</a></li>
-				  
-				  <div style="padding-left: 10%;">
-					<!-- INICIO FUNCIONALIDAD ESPECIFICA PARA CLIENTE HOME PISOS VINILICOS - NO DAR DE BAJA CATEGORIAS DESDE BD -->
-					<li class="menu_mm"><a style="color: gray;" href="/productsByCategory.html?category=-O9tTaqfGlJY97JVwQab">Accesorios</a></li>
-					<li class="menu_mm"><a style="color: gray;" href="/productsByCategory.html?category=-O9tTaqfGlJY97JVwQaa">Pisos Melamina</a></li>
-					<li class="menu_mm"><a style="color: gray;" href="/productsByCategory.html?category=-O9tTaqfGlJY97JVwQaf">Pisos Melamina
-						Waterproof</a></li>
-					<li class="menu_mm"><a style="color: gray;" href="/products.html?search=spc">Pisos SPC</a></li>
-					<li class="menu_mm"><a style="color: gray;" href="/products.html?search=lvt">Pisos LVT</a></li>
-					<li class="menu_mm"><a style="color: gray;" href="/products.html?search=zócalo">Zócalos</a></li>
-					<!-- FIN FUNCIONALIDAD ESPECIFICA PARA CLIENTE HOME PISOS VINILICOS-->
-				  </div>
+					<li class="menu_mm"><a href="/">Inicio</a></li>
 
-				<li class="menu_mm nav-item dropdown">
-				  <a class="dropdown-toggle" href="#" id="navbarDropdownMenu" role="button" data-bs-toggle="dropdown"
-					aria-expanded="false" data-prevent-close="true">Categorías
-				  </a>
-				  <ul class="dropdown-menu menu_mm" id="more-products-menu" aria-labelledby="navbarDropdownMenu">
-					<!-- Aquí se agregarán dinámicamente las categorías no destacadas -->
-				  </ul>
-				</li>
-				<li class="menu_mm"><a href="/products.html">Todos los Productos</a></li>
-				<li class="menu_mm">
-				  <a href="/contact.html#preguntas-frecuentes">Preguntas Frecuentes</a>
-				</li>
-				<li class="menu_mm"><a href="/contact.html">Contacto</a></li>
-			  </ul>
+					<div style="padding-left: 10%;">
+						<!-- INICIO FUNCIONALIDAD ESPECIFICA PARA CLIENTE HOME PISOS VINILICOS - NO DAR DE BAJA CATEGORIAS DESDE BD -->
+						<li class="menu_mm"><a style="color: gray;"
+								href="/productsByCategory.html?category=-O9tTaqfGlJY97JVwQab">Accesorios</a></li>
+						<li class="menu_mm"><a style="color: gray;"
+								href="/productsByCategory.html?category=-O9tTaqfGlJY97JVwQaa">Pisos Melamina</a></li>
+						<li class="menu_mm"><a style="color: gray;"
+								href="/productsByCategory.html?category=-O9tTaqfGlJY97JVwQaf">Pisos Melamina
+								Waterproof</a></li>
+						<li class="menu_mm"><a style="color: gray;" href="/products.html?search=spc">Pisos SPC</a></li>
+						<li class="menu_mm"><a style="color: gray;" href="/products.html?search=lvt">Pisos LVT</a></li>
+						<li class="menu_mm"><a style="color: gray;" href="/products.html?search=zócalo">Zócalos</a></li>
+						<!-- FIN FUNCIONALIDAD ESPECIFICA PARA CLIENTE HOME PISOS VINILICOS-->
+					</div>
+
+					<li class="menu_mm nav-item dropdown">
+						<a class="dropdown-toggle" href="#" id="navbarDropdownMenu" role="button"
+							data-bs-toggle="dropdown" aria-expanded="false" data-prevent-close="true">Categorías
+						</a>
+						<ul class="dropdown-menu menu_mm" id="more-products-menu" aria-labelledby="navbarDropdownMenu">
+							<!-- Aquí se agregarán dinámicamente las categorías no destacadas -->
+						</ul>
+					</li>
+					<li class="menu_mm"><a href="/products.html">Todos los Productos</a></li>
+					<li class="menu_mm">
+						<a href="/contact.html#preguntas-frecuentes">Preguntas Frecuentes</a>
+					</li>
+					<li class="menu_mm"><a href="/contact.html">Contacto</a></li>
+				</ul>
 			</nav>
-		  </div>
+		</div>
 
 		<!-- Products -->
 
@@ -240,8 +243,16 @@
 		<script src="js/init_firebase.js"></script>
 		<script src="js/categories.js"></script>
 		<script src="js/search.js"></script>
-		<!-- <script src="js/products_category.js"></script> -->
+
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-4HC6MV32X4"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag() { dataLayer.push(arguments); }
+			gtag('js', new Date());
+
+			gtag('config', 'G-4HC6MV32X4');
+		</script>
 </body>
 
 </html>
-
