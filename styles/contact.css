@@ -101,7 +101,11 @@ p a {
 	transition: all 200ms ease;
 }
 
-a, a:hover, a:visited, a:active, a:link {
+a,
+a:hover,
+a:visited,
+a:active,
+a:link {
 	text-decoration: none;
 	-webkit-font-smoothing: antialiased;
 	-webkit-text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
@@ -146,7 +150,12 @@ h5 {
 	font-size: 14px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	font-family: 'Open Sans', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-webkit-text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
@@ -174,7 +183,8 @@ section {
 	clear: both;
 }
 
-.clearfix::before, .clearfix::after {
+.clearfix::before,
+.clearfix::after {
 	content: "";
 	display: table;
 }
@@ -384,14 +394,16 @@ section {
 .main_nav ul li a:hover {
 	color: #937c6f;
 }
+
 .dropdown-menu {
 	width: auto;
-		
+
 	li {
 		margin-right: 0 !important;
 		text-align: left !important;
 	}
 }
+
 /*********************************
 3.3 Header - Search
 *********************************/
@@ -1256,4 +1268,19 @@ section {
 	100% {
 		transform: rotate(360deg);
 	}
+}
+
+.accordion_panel {
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.3s ease-out;
+}
+
+.accordion {
+	cursor: pointer;
+}
+
+.accordion_panel p {
+	padding: 10px;
+	margin: 0;
 }

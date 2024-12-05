@@ -6,6 +6,8 @@ $(document).ready(function () {
 	var menu = $('.menu');
 	var burger = $('.burger_container');
 	var map;
+	let FAQs = [];
+	const faqContainer = document.querySelector(".accordions");
 
 	setHeader();
 
@@ -20,6 +22,42 @@ $(document).ready(function () {
 	initMenu();
 	initGoogleMap();
 	initAccordions();
+	loadFAQ();
+
+	function loadFAQ() {
+		database
+			.ref("FAQ")
+			.once("value")
+			.then((snapshot) => {
+				FAQs = snapshot.val() ? Object.values(snapshot.val()) : [];
+				updateFAQDisplay(FAQs);
+			})
+			.catch((error) => {
+				console.error("Error obteniendo las preguntas frecuentes", error);
+			});
+	}
+
+	function updateFAQDisplay(FAQs) {
+		const faqContainer = document.getElementById('accordions'); // Get the container for the accordions
+		faqContainer.innerHTML = ""; // Clear previous content
+
+		FAQs.forEach((faq) => {
+			const faqHTML = `
+			<div class="accordion_container">
+				<div class="accordion d-flex flex-row align-items-center" onclick="toggleAccordion(this)">
+					<div>
+						${faq.Question}
+					</div>
+				</div>
+				<div class="accordion_panel">
+					<p>
+						${faq.Answer}
+					</p>
+				</div>
+			</div>`;
+			faqContainer.innerHTML += faqHTML;
+		});
+	}
 
 	function setHeader() {
 		if ($(window).scrollTop() > 100) {
@@ -146,3 +184,13 @@ $(document).ready(function () {
 		}
 	}
 });
+
+function toggleAccordion(accordion) {
+	const panel = accordion.nextElementSibling;
+
+	if (panel.style.maxHeight) {
+		panel.style.maxHeight = null;
+	} else {
+		panel.style.maxHeight = panel.scrollHeight + "px"; 
+	}
+}
