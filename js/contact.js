@@ -5,10 +5,9 @@ $(document).ready(function () {
 	var menuActive = false;
 	var menu = $('.menu');
 	var burger = $('.burger_container');
-	var map;
-	let FAQs = [];
-	const faqContainer = document.querySelector(".accordions");
-
+	var FAQs = [];
+	var contactInfo;
+	
 	setHeader();
 
 	$(window).on('resize', function () {
@@ -20,9 +19,63 @@ $(document).ready(function () {
 	});
 
 	initMenu();
-	initGoogleMap();
 	initAccordions();
 	loadFAQ();
+	loadContactInfo();
+
+	function loadContactInfo() {
+		database
+			.ref("Contact")
+			.once("value")
+			.then((snapshot) => {
+				contactInfo = snapshot.val() ? Object.values(snapshot.val())[0] : null;
+				updateContactInfoDisplay(contactInfo);
+			})
+			.catch((error) => {
+				console.error("Error obteniendo la información de contacto", error);
+			});
+	}
+
+	function updateContactInfoDisplay(contactInfo) {
+		const contactInfoContainer = document.getElementById('contact-items');
+		contactInfoContainer.innerHTML = "";
+
+		//Address
+		var contactInfoHTML = `
+		<li>
+            <div class="contact_info_icon">
+                <img src="images/contact_info_1.png" alt="direccion" />
+            </div>
+        	<div class="contact_info_text">
+                &nbsp;${contactInfo.Address}
+            </div>
+        </li>`;
+		contactInfoContainer.innerHTML += contactInfoHTML;
+
+		//Email
+		contactInfoHTML = `
+		<li>
+            <div class="contact_info_icon">
+                <img src="images/contact_info_2.png" alt="correo" />
+            </div>
+        	<div class="contact_info_text">
+                &nbsp;${contactInfo.Email}
+            </div>
+        </li>`;
+		contactInfoContainer.innerHTML += contactInfoHTML;
+
+		//Phone
+		contactInfoHTML = `
+		<li>
+            <div class="contact_info_icon">
+                <img src="images/contact_info_3.png" alt="telefono" />
+            </div>
+        	<div class="contact_info_text">
+                &nbsp;${contactInfo.Phone}
+            </div>
+        </li>`;
+		contactInfoContainer.innerHTML += contactInfoHTML;
+	}
 
 	function loadFAQ() {
 		database
@@ -38,8 +91,8 @@ $(document).ready(function () {
 	}
 
 	function updateFAQDisplay(FAQs) {
-		const faqContainer = document.getElementById('accordions'); // Get the container for the accordions
-		faqContainer.innerHTML = ""; // Clear previous content
+		const faqContainer = document.querySelector(".accordions");
+		faqContainer.innerHTML = "";
 
 		FAQs.forEach((faq) => {
 			const faqHTML = `
@@ -102,39 +155,7 @@ $(document).ready(function () {
 		menu.removeClass('active');
 		menuActive = false;
 	}
-
-	function initGoogleMap() {
-		var myLatlng = new google.maps.LatLng(36.131475, -5.350348);
-		var mapOptions =
-		{
-			center: myLatlng,
-			zoom: 17,
-			mapTypeId: google.maps.MapTypeId.ROADMAP,
-			draggable: true,
-			scrollwheel: false,
-			zoomControl: true,
-			zoomControlOptions:
-			{
-				position: google.maps.ControlPosition.RIGHT_CENTER
-			},
-			mapTypeControl: false,
-			scaleControl: false,
-			streetViewControl: false,
-			rotateControl: false,
-			fullscreenControl: true,
-			styles: []
-		}
-
-		map = new google.maps.Map(document.getElementById('map'), mapOptions);
-
-		google.maps.event.addDomListener(window, 'resize', function () {
-			setTimeout(function () {
-				google.maps.event.trigger(map, "resize");
-				map.setCenter(myLatlng);
-			}, 1400);
-		});
-	}
-
+	
 	function initAccordions() {
 		if ($('.accordion').length) {
 			var accs = $('.accordion');
@@ -191,6 +212,6 @@ function toggleAccordion(accordion) {
 	if (panel.style.maxHeight) {
 		panel.style.maxHeight = null;
 	} else {
-		panel.style.maxHeight = panel.scrollHeight + "px"; 
+		panel.style.maxHeight = panel.scrollHeight + "px";
 	}
 }
