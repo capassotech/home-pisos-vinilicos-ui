@@ -943,6 +943,7 @@ section {
 	font-weight: 600;
 	color: #232323;
 	line-height: 0.75;
+	min-width: 300px;
 }
 
 .product_price {

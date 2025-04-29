@@ -1071,6 +1071,7 @@ section {
 
 .product_name {
 	padding-inline: 2%;
+	min-width: 300px;
 }
 
 .product_name a {
